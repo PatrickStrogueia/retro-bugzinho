@@ -75,3 +75,22 @@
   color: var(--text-primary);
   font-weight: 500;
 }
+
+@media (max-width: 640px) {
+  .title {
+    font-size: 1.35rem;
+  }
+
+  .gridCartas {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .posicao {
+    width: 32px;
+    height: 32px;
+    font-size: 1rem;
+    top: -10px;
+    left: -10px;
+  }
+}

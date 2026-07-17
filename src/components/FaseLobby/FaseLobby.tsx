@@ -2,8 +2,6 @@
 
 import { useEffect, useRef } from "react";
 import styles from "./FaseLobby.module.css";
-import { MusicNotes } from "@phosphor-icons/react";
-import { SlotMachineIcon } from "../SlotMachineIcon/SlotMachineIcon";
 
 interface FaseLobbyProps {
   sessaoId: string;
@@ -29,8 +27,8 @@ export const FaseLobby = ({ sessaoId, isAdmin }: FaseLobbyProps) => {
     <div className={styles.container}>
       <div className={styles.presentationCard}>
         <div className={styles.logoContainer}>
-          <span className={styles.icon}>
-            <SlotMachineIcon size={64} color="var(--casino-gold)" />
+          <span className={styles.icon} style={{ fontSize: '64px' }}>
+            🎰
           </span>
           <h1 className={styles.title}>Bugzinho Retro</h1>
         </div>
@@ -55,7 +53,7 @@ export const FaseLobby = ({ sessaoId, isAdmin }: FaseLobbyProps) => {
         {isAdmin && (
           <div className={styles.audioPlayer}>
             <p className={styles.audioLabel}>
-              Som Ambiente <MusicNotes weight="fill" style={{ display: 'inline', marginLeft: '4px' }} />
+              Som Ambiente <span style={{ marginLeft: '4px' }}>🎵</span>
             </p>
             <audio ref={audioRef} controls loop src="/casino-lounge.mp3" />
           </div>

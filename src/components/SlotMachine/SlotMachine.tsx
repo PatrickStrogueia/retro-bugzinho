@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import styles from "./SlotMachine.module.css";
-import { Club, Spade, Heart, Diamond, DiceThree } from "@phosphor-icons/react";
 
 export const SlotMachine = () => {
   const [dots, setDots] = useState("");
@@ -20,29 +19,29 @@ export const SlotMachine = () => {
         <div className={styles.reels}>
           <div className={styles.reel}>
             <div className={styles.symbols}>
-              <span><Club weight="fill" color="var(--casino-green)" /></span>
-              <span><DiceThree weight="fill" color="#fff" /></span>
-              <span><Spade weight="fill" color="var(--casino-gold)" /></span>
-              <span><Heart weight="fill" color="var(--casino-red)" /></span>
-              <span><Club weight="fill" color="var(--casino-green)" /></span>
+              <span>♣️</span>
+              <span>🎲</span>
+              <span>♠️</span>
+              <span>♥️</span>
+              <span>♣️</span>
             </div>
           </div>
           <div className={styles.reel}>
             <div className={styles.symbols} style={{ animationDelay: "0.2s" }}>
-              <span><Heart weight="fill" color="var(--casino-red)" /></span>
-              <span><Diamond weight="fill" color="#38bdf8" /></span>
-              <span><Spade weight="fill" color="var(--casino-gold)" /></span>
-              <span><DiceThree weight="fill" color="#fff" /></span>
-              <span><Heart weight="fill" color="var(--casino-red)" /></span>
+              <span>♥️</span>
+              <span>♦️</span>
+              <span>♠️</span>
+              <span>🎲</span>
+              <span>♥️</span>
             </div>
           </div>
           <div className={styles.reel}>
             <div className={styles.symbols} style={{ animationDelay: "0.4s" }}>
-              <span><Club weight="fill" color="var(--casino-green)" /></span>
-              <span><DiceThree weight="fill" color="#fff" /></span>
-              <span><Heart weight="fill" color="var(--casino-red)" /></span>
-              <span><Diamond weight="fill" color="#38bdf8" /></span>
-              <span><Club weight="fill" color="var(--casino-green)" /></span>
+              <span>♣️</span>
+              <span>🎲</span>
+              <span>♥️</span>
+              <span>♦️</span>
+              <span>♣️</span>
             </div>
           </div>
         </div>

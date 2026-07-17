@@ -60,3 +60,18 @@
   font-size: 0.9rem;
   color: var(--text-secondary);
 }
+
+@media (max-width: 640px) {
+  .title {
+    font-size: 1.25rem;
+  }
+
+  .gridCartas {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .header {
+    padding: 1rem;
+  }
+}

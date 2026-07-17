@@ -12,6 +12,7 @@ import { FaseVotacao } from "@/components/FaseVotacao/FaseVotacao";
 import { FaseResultados } from "@/components/FaseResultados/FaseResultados";
 import { SlotMachine } from "@/components/SlotMachine/SlotMachine";
 import { FaseLobby } from "@/components/FaseLobby/FaseLobby";
+import styles from "./page.module.css";
 
 export default function SalaDeRetrospectiva() {
   const params = useParams();
@@ -134,21 +135,21 @@ export default function SalaDeRetrospectiva() {
   };
 
   if (loading) {
-    return <div style={{ textAlign: "center", padding: "4rem" }}>Carregando a mesa...</div>;
+    return <div className={styles.loadingMessage}>Carregando a mesa...</div>;
   }
 
   if (!statusSessao) {
-    return <div style={{ textAlign: "center", padding: "4rem", color: "var(--casino-red)" }}>Sala não encontrada! 😕</div>;
+    return <div className={styles.errorMessage}>Sala não encontrada! 😕</div>;
   }
 
   // TELA DE LOGIN (Se não for participante ainda)
   if (!participanteId) {
     return (
-      <div style={{ display: "flex", flexDirection: "column", gap: "2rem", alignItems: "center", padding: "4rem 1rem" }}>
-        <h1 style={{ color: "var(--casino-gold)" }}>Puxe uma cadeira</h1>
-        <p style={{ color: "var(--text-secondary)" }}>Identifique-se para entrar na mesa.</p>
+      <div className={styles.loginContainer}>
+        <h1 className={styles.loginTitle}>Puxe uma cadeira</h1>
+        <p className={styles.loginSubtitle}>Identifique-se para entrar na mesa.</p>
         
-        <div style={{ width: "100%", maxWidth: "400px", display: "flex", flexDirection: "column", gap: "1rem" }}>
+        <div className={styles.loginForm}>
           <Input 
             label="Seu Nome" 
             placeholder="Ex: João QA" 
@@ -164,10 +165,10 @@ export default function SalaDeRetrospectiva() {
 
   // TELA DO JOGO (Depende do status da sessão)
   return (
-    <div style={{ padding: "2rem 1rem", maxWidth: "1000px", margin: "0 auto" }}>
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "2rem", paddingBottom: "1rem", borderBottom: "1px dashed var(--bg-surface-hover)" }}>
-        <h2 style={{ color: "var(--casino-gold)" }}>Fase Atual: {statusSessao}</h2>
-        <span style={{ fontSize: "0.85rem", color: "var(--text-secondary)" }}>ID da Sala: {sessaoId}</span>
+    <div className={styles.pageContainer}>
+      <div className={styles.faseHeader}>
+        <h2>Fase Atual: {statusSessao}</h2>
+        <span className={styles.salaId}>ID da Sala: {sessaoId}</span>
       </div>
 
       {statusSessao === "LOBBY" && (
@@ -192,16 +193,9 @@ export default function SalaDeRetrospectiva() {
 
       {/* PAINEL DO DEALER (Apenas para o Admin) */}
       {isAdmin && (
-        <div style={{ 
-          marginTop: "4rem", 
-          padding: "1.5rem", 
-          backgroundColor: "#000", 
-          borderRadius: "12px", 
-          border: "2px solid var(--casino-gold)",
-          boxShadow: "0 0 20px rgba(251, 191, 36, 0.2)"
-        }}>
-          <h3 style={{ color: "var(--casino-gold)", marginBottom: "1rem", textAlign: "center" }}>👑 Painel do Dealer</h3>
-          <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap", justifyContent: "center" }}>
+        <div className={styles.painelDealer}>
+          <h3 className={styles.painelDealerTitle}>👑 Painel do Dealer</h3>
+          <div className={styles.painelDealerActions}>
             <Button variant="secondary" onClick={() => avancarFase("LOBBY")} disabled={statusSessao === "LOBBY"}>Voltar p/ Lobby</Button>
             <Button variant="primary" onClick={() => avancarFase("COLETA")} disabled={statusSessao === "COLETA"}>Iniciar Coleta (Apostas)</Button>
             <Button variant="primary" onClick={() => avancarFase("VOTACAO")} disabled={statusSessao === "VOTACAO" || isProcessingAI}>

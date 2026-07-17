@@ -5,7 +5,6 @@ import { supabase } from "@/lib/supabase";
 import { Card } from "../Card/Card";
 import { ItemRetro } from "@/types/database";
 import styles from "./FaseResultados.module.css";
-import { Trophy, DiceThree } from "@phosphor-icons/react";
 
 interface FaseResultadosProps {
   sessaoId: string;
@@ -30,14 +29,14 @@ export const FaseResultados = ({ sessaoId }: FaseResultadosProps) => {
     buscarItens();
   }, [sessaoId]);
 
-  if (loading) return <div style={{ textAlign: "center", padding: "3rem" }}>Contando as fichas... <DiceThree weight="fill" style={{ display: 'inline', marginLeft: '8px' }} /></div>;
+  if (loading) return <div style={{ textAlign: "center", padding: "3rem" }}>Contando as fichas... <span style={{ marginLeft: '8px' }}>🎲</span></div>;
 
   return (
     <div className={styles.container}>
       <div className={styles.header}>
         <h3 className={styles.title}>
           Resultados da Rodada 
-          <Trophy weight="fill" style={{ display: 'inline-block', marginLeft: '12px', color: 'var(--casino-gold)' }} />
+          <span style={{ display: 'inline-block', marginLeft: '12px', fontSize: '1.5rem' }}>🏆</span>
         </h3>
         <p className={styles.subtitle}>Estes foram os temas agrupados pela IA, ordenados pelos mais votados da equipe.</p>
       </div>

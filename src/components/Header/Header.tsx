@@ -3,15 +3,14 @@
 import React from 'react';
 import Link from 'next/link';
 import styles from './Header.module.css';
-import { SlotMachineIcon } from '../SlotMachineIcon/SlotMachineIcon';
 
 export const Header = () => {
   return (
     <header className={styles.header}>
       <div className={styles.container}>
         <Link href="/" className={styles.logoLink}>
-          <span className={styles.icon}>
-            <SlotMachineIcon size={28} color="var(--casino-gold)" />
+          <span className={styles.icon} style={{ fontSize: '28px' }}>
+            🎰
           </span>
           <span className={styles.logoText}>Bugzinho</span>
         </Link>

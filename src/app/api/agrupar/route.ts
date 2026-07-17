@@ -2,6 +2,10 @@ import { NextRequest } from "next/server";
 import { GoogleGenAI } from "@google/genai";
 import { createClient } from "@supabase/supabase-js";
 
+if (process.env.NODE_ENV === "development") {
+  process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
+}
+
 // Initialize Supabase Client
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
 const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
@@ -51,18 +55,53 @@ Retorne um array JSON com os itens agrupados. Cada item deve ter:
 Certifique-se de retornar APENAS o JSON válido, no formato de uma lista.
     `;
 
-    // 3. Call Gemini
-    const response = await ai.models.generateContent({
-      model: "gemini-3.5-flash",
-      contents: prompt,
-      config: {
-        responseMimeType: "application/json",
-      },
-    });
+    // 3. Call Gemini with retry logic
+    const modelo = "gemini-3.5-flash";
+    const MAX_TENTATIVAS = 3;
+    const DELAY_BASE_MS = 2000; // 2s, 4s, 8s...
 
-    const agrupadosText = response.text; // Note: response.text is a string/getter in the new SDK
+    let agrupadosText: string | undefined;
+
+    for (let tentativa = 0; tentativa < MAX_TENTATIVAS; tentativa++) {
+      console.log(`[agrupar] Tentativa ${tentativa + 1}/${MAX_TENTATIVAS} com modelo: ${modelo}`);
+
+      try {
+        const response = await ai.models.generateContent({
+          model: modelo,
+          contents: prompt,
+          config: {
+            responseMimeType: "application/json",
+          },
+        });
+
+        agrupadosText = response.text;
+        if (agrupadosText) {
+          console.log(`[agrupar] Sucesso com modelo ${modelo} na tentativa ${tentativa + 1}`);
+          break; // Success, exit retry loop
+        }
+      } catch (geminiError: any) {
+        const statusCode = geminiError?.status || geminiError?.error?.code || geminiError?.code;
+        const isRetryable = statusCode === 503 || statusCode === 429 || statusCode === "UNAVAILABLE";
+
+        console.warn(`[agrupar] Erro na tentativa ${tentativa + 1} (modelo: ${modelo}):`, geminiError?.message || geminiError);
+
+        if (isRetryable && tentativa < MAX_TENTATIVAS - 1) {
+          const delay = DELAY_BASE_MS * Math.pow(2, tentativa);
+          console.log(`[agrupar] Aguardando ${delay}ms antes de tentar novamente...`);
+          await new Promise((resolve) => setTimeout(resolve, delay));
+          continue;
+        }
+
+        // Non-retryable or last attempt
+        throw new Error(
+          `A IA está temporariamente indisponível (${statusCode || "erro desconhecido"}). ` +
+          `Tente novamente em alguns instantes.`
+        );
+      }
+    }
+
     if (!agrupadosText) {
-      throw new Error("Resposta vazia da IA");
+      throw new Error("Resposta vazia da IA após todas as tentativas.");
     }
 
     let agrupados = JSON.parse(agrupadosText);

@@ -41,3 +41,9 @@ button {
   background: none;
   font-family: inherit;
 }
+
+@media (max-width: 640px) {
+  body {
+    font-size: 0.95rem;
+  }
+}

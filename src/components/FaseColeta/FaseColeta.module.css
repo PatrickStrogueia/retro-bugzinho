@@ -52,3 +52,21 @@
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   gap: 1rem;
 }
+
+@media (max-width: 640px) {
+  .formulario {
+    padding: 1.25rem;
+  }
+
+  .title {
+    font-size: 1.25rem;
+  }
+
+  .acoes {
+    flex-direction: column;
+  }
+
+  .gridCartas {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,114 @@
+.pageContainer {
+  padding: 2rem 1rem;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.faseHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px dashed var(--bg-surface-hover);
+}
+
+.faseHeader h2 {
+  color: var(--casino-gold);
+  font-size: 1.5rem;
+}
+
+.salaId {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+/* Tela de Login */
+.loginContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  align-items: center;
+  padding: 4rem 1rem;
+}
+
+.loginTitle {
+  color: var(--casino-gold);
+}
+
+.loginSubtitle {
+  color: var(--text-secondary);
+}
+
+.loginForm {
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Painel do Dealer */
+.painelDealer {
+  margin-top: 4rem;
+  padding: 1.5rem;
+  background-color: #000;
+  border-radius: 12px;
+  border: 2px solid var(--casino-gold);
+  box-shadow: 0 0 20px rgba(251, 191, 36, 0.2);
+}
+
+.painelDealerTitle {
+  color: var(--casino-gold);
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.painelDealerActions {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* Loading e erro */
+.loadingMessage {
+  text-align: center;
+  padding: 4rem;
+}
+
+.errorMessage {
+  text-align: center;
+  padding: 4rem;
+  color: var(--casino-red);
+}
+
+/* Responsividade */
+@media (max-width: 640px) {
+  .pageContainer {
+    padding: 1rem 0.75rem;
+  }
+
+  .faseHeader {
+    flex-direction: column;
+    gap: 0.5rem;
+    text-align: center;
+  }
+
+  .faseHeader h2 {
+    font-size: 1.15rem;
+  }
+
+  .loginContainer {
+    padding: 2rem 1rem;
+  }
+
+  .painelDealer {
+    margin-top: 2rem;
+    padding: 1rem;
+  }
+
+  .painelDealerActions {
+    flex-direction: column;
+  }
+}

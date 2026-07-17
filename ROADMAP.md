@@ -64,7 +64,8 @@ Este documento detalha o plano de ação passo a passo para o desenvolvimento do
   - Efeito visual de "Cartas sendo distribuídas".
   - Tela de espera rodando uma roleta/caça-níqueis enquanto a IA (Gemini) processa os dados.
   - Efeitos de hover e sons (opcional).
-- [ ] **Testes Finais:** Realizar testes de carga (ex: 10 pessoas acessando e votando ao mesmo tempo) e revisão de responsividade (garantir que funciona bem em celulares).
+- [x] **Revisão de Responsividade:** Garantir que o sistema e as interações funcionem perfeitamente em telas pequenas (mobile).
+- [ ] **Testes de Carga:** Realizar testes com múltiplos usuários (ex: 10 pessoas acessando e votando ao mesmo tempo) para testar o limite do Supabase e do Gemini.
 - [ ] **Deploy:** Hospedar a aplicação na plataforma Vercel.
 
 > **Critério de Aceite:** Sistema online no ar via URL pública, com experiência rica e gamificada para os usuários.

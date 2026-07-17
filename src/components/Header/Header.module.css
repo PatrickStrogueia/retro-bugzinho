@@ -67,3 +67,38 @@
   50% { opacity: 0.5; }
   100% { opacity: 1; }
 }
+
+.logoLink {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  text-decoration: none;
+}
+
+.logoText {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.5px;
+}
+
+@media (max-width: 640px) {
+  .container {
+    padding: 0 1rem;
+  }
+
+  .logoText {
+    font-size: 1rem;
+  }
+
+  .status span {
+    display: none;
+  }
+
+  .status {
+    padding: 0.35rem;
+    min-width: 28px;
+    min-height: 28px;
+    justify-content: center;
+  }
+}

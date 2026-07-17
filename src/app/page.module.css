@@ -67,3 +67,28 @@
   flex-wrap: wrap;
   justify-content: center;
 }
+
+@media (max-width: 640px) {
+  .main {
+    gap: 1.25rem;
+  }
+
+  .title {
+    font-size: 1.5rem;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .subtitle {
+    font-size: 0.95rem;
+    margin-bottom: 1rem;
+  }
+
+  .section {
+    padding: 1.25rem;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}

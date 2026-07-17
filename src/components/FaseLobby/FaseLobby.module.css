@@ -134,3 +134,32 @@
   text-transform: uppercase;
   letter-spacing: 1px;
 }
+
+@media (max-width: 640px) {
+  .presentationCard {
+    padding: 2.5rem 1.5rem;
+    border-radius: 16px;
+  }
+
+  .title {
+    font-size: 1.75rem;
+  }
+
+  .subtitle {
+    font-size: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .linkBox {
+    padding: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .url {
+    font-size: 0.8rem;
+  }
+
+  .loading {
+    margin-bottom: 2rem;
+  }
+}

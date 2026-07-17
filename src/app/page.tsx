@@ -5,7 +5,6 @@ import { useRouter } from "next/navigation";
 import { supabase } from "@/lib/supabase";
 import styles from "./page.module.css";
 import { Button } from "@/components/Button/Button";
-import { SlotMachineIcon } from "@/components/SlotMachineIcon/SlotMachineIcon";
 
 export default function Home() {
   const router = useRouter();
@@ -39,7 +38,7 @@ export default function Home() {
     <main className={styles.main}>
       <h1 className={styles.title} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '12px' }}>
         Bem-vindo ao Bugzinho
-        <SlotMachineIcon size={48} color="var(--casino-gold)" />
+        <span style={{ fontSize: "48px" }}>🎰</span>
       </h1>
       <p className={styles.subtitle}>Sua retrospectiva gamificada e imersiva para times de elite.</p>
 

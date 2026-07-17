@@ -7,7 +7,6 @@ import { PokerChip } from "../PokerChip/PokerChip";
 import { Button } from "../Button/Button";
 import { ItemRetro } from "@/types/database";
 import styles from "./FaseVotacao.module.css";
-import { Spade } from "@phosphor-icons/react";
 
 interface FaseVotacaoProps {
   sessaoId: string;
@@ -105,7 +104,7 @@ export const FaseVotacao = ({ sessaoId }: FaseVotacaoProps) => {
       <div className={styles.header}>
         <h3 className={styles.title}>
           Hora da Votação!
-          <Spade weight="fill" style={{ display: 'inline-block', marginLeft: '12px', color: 'var(--casino-gold)' }} />
+          <span style={{ display: 'inline-block', marginLeft: '12px', fontSize: '1.5rem' }}>♠️</span>
         </h3>
         <p className={styles.subtitle}>Distribua suas fichas nos temas que acha mais importantes para discutirmos.</p>
         
