@@ -1,0 +1,77 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.header {
+  text-align: center;
+}
+
+.title {
+  color: var(--casino-gold);
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.subtitle {
+  color: var(--text-secondary);
+}
+
+.gridCartas {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 2rem;
+  padding: 1rem 0;
+}
+
+.cartaWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  position: relative;
+  background: rgba(0, 0, 0, 0.2);
+  padding: 1rem;
+  border-radius: 12px;
+  border: 1px solid var(--bg-surface-hover);
+}
+
+.posicao {
+  position: absolute;
+  top: -15px;
+  left: -15px;
+  background-color: var(--casino-gold);
+  color: #000;
+  font-weight: bold;
+  font-size: 1.2rem;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  z-index: 2;
+}
+
+.cardPersonalizado {
+  min-height: 150px;
+}
+
+.textoCarta {
+  font-size: 1rem;
+  line-height: 1.4;
+}
+
+.areaVotos {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 1rem;
+  border-top: 1px dashed var(--bg-surface-hover);
+}
+
+.votosTexto {
+  color: var(--text-primary);
+  font-weight: 500;
+}
