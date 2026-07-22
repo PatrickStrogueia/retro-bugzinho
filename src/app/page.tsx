@@ -1,14 +1,23 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import { LockSimple, LockSimpleOpen } from "@phosphor-icons/react";
 import { supabase } from "@/lib/supabase";
 import styles from "./page.module.css";
 import { Button } from "@/components/Button/Button";
+import { AdminAuthModal } from "@/components/AdminAuthModal/AdminAuthModal";
 
 export default function Home() {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
+  const [isGlobalAdmin, setIsGlobalAdmin] = useState(false);
+  const [showAuthModal, setShowAuthModal] = useState(false);
+
+  useEffect(() => {
+    const adminFlag = localStorage.getItem("bugzinho_global_admin");
+    if (adminFlag === "true") setIsGlobalAdmin(true);
+  }, []);
 
   const criarNovaSala = async () => {
     setLoading(true);
@@ -50,10 +59,13 @@ export default function Home() {
         
         <Button 
           variant="gold" 
-          onClick={criarNovaSala} 
+          onClick={isGlobalAdmin ? criarNovaSala : () => setShowAuthModal(true)} 
           disabled={loading}
-          style={{ width: '100%', padding: '1rem', fontSize: '1.2rem' }}
+          style={{ width: '100%', padding: '1rem', fontSize: '1.2rem', gap: '10px' }}
         >
+          {isGlobalAdmin
+            ? <LockSimpleOpen size={22} weight="bold" />
+            : <LockSimple size={22} weight="bold" />}
           {loading ? "Embaralhando as cartas..." : "Criar Nova Sala (Dealer)"}
         </Button>
       </section>
@@ -63,6 +75,16 @@ export default function Home() {
           Design System PoC disponível em <a href="/poc" style={{ color: 'var(--casino-green)', textDecoration: 'underline' }}>/poc</a>
         </p>
       </div>
+
+      <AdminAuthModal
+        isOpen={showAuthModal}
+        onClose={() => setShowAuthModal(false)}
+        onSuccess={() => {
+          setIsGlobalAdmin(true);
+          setShowAuthModal(false);
+          criarNovaSala();
+        }}
+      />
     </main>
   );
 }
