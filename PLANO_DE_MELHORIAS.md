@@ -13,9 +13,9 @@ Este documento consolida a estratégia de evolução do **Bugzinho Retro**, orga
   - [x] Criar componente `FaseAcoes` para listagem e criação de tarefas vinculadas aos cards mais votados.
   - [x] Atualizar o painel do Dealer em [`src/app/sala/[id]/page.tsx`](file:///C:/Projetos/CoE/retro-bugzinho/src/app/sala/%5Bid%5D/page.tsx) para incluir o botão "Definir Ações".
 
-- [ ] **1.2 Rastreabilidade dos Cards Agrupados (Drill-down de IA)**
-  - [ ] Alterar a rota [`src/app/api/agrupar/route.ts`](file:///C:/Projetos/CoE/retro-bugzinho/src/app/api/agrupar/route.ts) para não deletar os cards originais, salvando uma referência `parent_id` ou usando uma tabela relacional de agrupamento.
-  - [ ] Adicionar suporte a modal/tooltip nos cards das fases de Votação e Resultados para visualizar os post-its originais que compõem aquele tema e seus autores.
+- [x] **1.2 Rastreabilidade dos Cards Agrupados (Drill-down de IA)**
+  - [x] Alterar a rota [`src/app/api/agrupar/route.ts`](file:///C:/Projetos/CoE/retro-bugzinho/src/app/api/agrupar/route.ts) para não deletar os cards originais, salvando uma referência `parent_id` ou usando uma tabela relacional de agrupamento.
+  - [x] Adicionar suporte a modal/tooltip nos cards das fases de Votação e Resultados para visualizar os post-its originais que compõem aquele tema e seus autores.
 
 ---
 

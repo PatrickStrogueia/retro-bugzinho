@@ -42,21 +42,33 @@ export const FaseResultados = ({ sessaoId }: FaseResultadosProps) => {
       </div>
 
       <div className={styles.gridCartas}>
-        {itens.map((item, index) => (
-          <div key={item.id} className={styles.cartaWrapper}>
-            <div className={styles.posicao}>#{index + 1}</div>
-            <Card type={item.tipo} className={styles.cardPersonalizado}>
-              <p className={styles.textoCarta}>{item.texto}</p>
-            </Card>
+        {itens.filter(i => !i.parent_id).map((item, index) => {
+          const filhos = itens.filter(i => i.parent_id === item.id);
+          const tooltipText = filhos.length > 0 
+            ? "Post-its originais:\n" + filhos.map(f => `• ${f.texto}`).join('\n') 
+            : "";
+
+          return (
+            <div key={item.id} className={styles.cartaWrapper} title={tooltipText}>
+              <div className={styles.posicao}>#{index + 1}</div>
+              <Card type={item.tipo} className={styles.cardPersonalizado}>
+                <p className={styles.textoCarta}>{item.texto}</p>
+                {filhos.length > 0 && (
+                  <div style={{ fontSize: "0.75rem", marginTop: "8px", color: "var(--text-secondary)", fontStyle: "italic", cursor: "help" }}>
+                    ℹ️ Ver {filhos.length} originais (Hover)
+                  </div>
+                )}
+              </Card>
             
             <div className={styles.areaVotos}>
               <span className={styles.votosTexto}>
                 Total de Fichas: <strong style={{ color: "var(--casino-gold)", fontSize: "1.2rem", marginLeft: "0.5rem" }}>{item.votos}</strong>
               </span>
             </div>
-          </div>
-        ))}
-        {itens.length === 0 && (
+            </div>
+          );
+        })}
+        {itens.filter(i => !i.parent_id).length === 0 && (
           <p style={{ color: "var(--text-secondary)", gridColumn: "1 / -1", textAlign: "center" }}>
             Nenhum item foi registrado nesta sessão.
           </p>

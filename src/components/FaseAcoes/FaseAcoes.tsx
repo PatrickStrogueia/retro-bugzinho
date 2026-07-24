@@ -215,7 +215,7 @@ export const FaseAcoes = ({ sessaoId, isAdmin }: FaseAcoesProps) => {
               onChange={(e) => setSelectedItemId(e.target.value)}
             >
               <option value="">-- Ação Geral da Retro --</option>
-              {topItens.map((item) => (
+              {topItens.filter(i => !i.parent_id).map((item) => (
                 <option key={item.id} value={item.id}>
                   [{item.votos} votos] {item.texto.substring(0, 50)}...
                 </option>

@@ -22,6 +22,7 @@ export interface ItemRetro {
   tipo: ItemType;
   votos: number;
   created_at: string;
+  parent_id?: string | null;
 }
 
 export interface AcaoRetro {

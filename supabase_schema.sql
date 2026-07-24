@@ -13,3 +13,6 @@ CREATE TABLE IF NOT EXISTS acoes_retro (
 
 -- Habilitar a publicação Realtime do Supabase para acoes_retro
 ALTER PUBLICATION supabase_realtime ADD TABLE acoes_retro;
+
+-- Alteração para a Fase 1.2: Adicionar rastreabilidade (parent_id) aos itens da retrospectiva
+ALTER TABLE itens_retro ADD COLUMN IF NOT EXISTS parent_id UUID NULL REFERENCES itens_retro(id) ON DELETE CASCADE;

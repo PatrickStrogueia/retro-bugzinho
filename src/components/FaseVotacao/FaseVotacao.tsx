@@ -117,14 +117,23 @@ export const FaseVotacao = ({ sessaoId }: FaseVotacaoProps) => {
       </div>
 
       <div className={styles.gridCartas}>
-        {itens.map((item) => {
+        {itens.filter(i => !i.parent_id).map((item) => {
           const jaVotei = meusVotos.includes(item.id);
           const semFichas = fichasRestantes <= 0;
+          const filhos = itens.filter(i => i.parent_id === item.id);
+          const tooltipText = filhos.length > 0 
+            ? "Post-its originais:\n" + filhos.map(f => `• ${f.texto}`).join('\n') 
+            : "";
           
           return (
-            <div key={item.id} className={styles.cartaWrapper} style={{ opacity: (semFichas && !jaVotei) ? 0.6 : 1 }}>
+            <div key={item.id} className={styles.cartaWrapper} style={{ opacity: (semFichas && !jaVotei) ? 0.6 : 1 }} title={tooltipText}>
               <Card type={item.tipo} className={styles.cardPersonalizado}>
                 <p className={styles.textoCarta}>{item.texto}</p>
+                {filhos.length > 0 && (
+                  <div style={{ fontSize: "0.75rem", marginTop: "8px", color: "var(--text-secondary)", fontStyle: "italic", cursor: "help" }}>
+                    ℹ️ Ver {filhos.length} originais (Hover)
+                  </div>
+                )}
               </Card>
               
               <div className={styles.areaVoto}>
@@ -147,7 +156,7 @@ export const FaseVotacao = ({ sessaoId }: FaseVotacaoProps) => {
             </div>
           );
         })}
-        {itens.length === 0 && (
+        {itens.filter(i => !i.parent_id).length === 0 && (
           <p style={{ color: "var(--text-secondary)", gridColumn: "1 / -1", textAlign: "center" }}>
             A mesa está vazia! Nenhuma carta foi jogada na fase de coleta.
           </p>

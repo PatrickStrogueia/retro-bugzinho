@@ -26,7 +26,8 @@ export async function POST(request: NextRequest) {
     const { data: itens, error: fetchError } = await supabase
       .from("itens_retro")
       .select("*")
-      .eq("sessao_id", sessaoId);
+      .eq("sessao_id", sessaoId)
+      .is("parent_id", null);
 
     if (fetchError) {
       console.error("Error fetching items:", fetchError);
@@ -51,6 +52,7 @@ ${JSON.stringify(itens)}
 Retorne um array JSON com os itens agrupados. Cada item deve ter:
 - "texto": String resumindo o tema do grupo.
 - "tipo": O tipo original ('good', 'bad', ou 'improve').
+- "itens_originais_ids": Array de strings com os "id" dos itens originais que compõem este grupo.
 
 Certifique-se de retornar APENAS o JSON válido, no formato de uma lista.
     `;
@@ -108,31 +110,39 @@ Certifique-se de retornar APENAS o JSON válido, no formato de uma lista.
     
     // Validate output structure if needed...
 
-    // 4. Delete old items and Insert new ones
-    // Delete
-    const { error: deleteError } = await supabase
-      .from("itens_retro")
-      .delete()
-      .eq("sessao_id", sessaoId);
+    // 4. Update old items and Insert new ones
+    for (const grupo of agrupados) {
+      // Insert o novo item agrupado
+      const novoItem = {
+        sessao_id: sessaoId,
+        texto: grupo.texto,
+        tipo: grupo.tipo,
+        votos: 0,
+      };
 
-    if (deleteError) {
-      throw new Error("Erro ao limpar itens antigos");
-    }
+      const { data: insertedData, error: insertError } = await supabase
+        .from("itens_retro")
+        .insert([novoItem])
+        .select();
 
-    // Insert
-    const novosItens = agrupados.map((item: any) => ({
-      sessao_id: sessaoId,
-      texto: item.texto,
-      tipo: item.tipo,
-      votos: 0,
-    }));
+      if (insertError || !insertedData || insertedData.length === 0) {
+        console.error("Erro ao inserir item agrupado", insertError);
+        continue;
+      }
 
-    const { error: insertError } = await supabase
-      .from("itens_retro")
-      .insert(novosItens);
+      const novoItemId = insertedData[0].id;
 
-    if (insertError) {
-      throw new Error("Erro ao inserir itens agrupados");
+      // Update the original items to point to this new item
+      if (grupo.itens_originais_ids && Array.isArray(grupo.itens_originais_ids) && grupo.itens_originais_ids.length > 0) {
+        const { error: updateItemsError } = await supabase
+          .from("itens_retro")
+          .update({ parent_id: novoItemId })
+          .in("id", grupo.itens_originais_ids);
+
+        if (updateItemsError) {
+          console.error("Erro ao atualizar parent_id dos itens originais", updateItemsError);
+        }
+      }
     }
 
     // 5. Update Session Status to VOTACAO
