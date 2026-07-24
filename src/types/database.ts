@@ -1,4 +1,4 @@
-export type SessaoStatus = 'LOBBY' | 'COLETA' | 'PROCESSANDO' | 'VOTACAO' | 'RESULTADOS';
+export type SessaoStatus = 'LOBBY' | 'COLETA' | 'PROCESSANDO' | 'VOTACAO' | 'RESULTADOS' | 'ACOES';
 
 export type ItemType = 'good' | 'bad' | 'improve';
 
@@ -23,3 +23,14 @@ export interface ItemRetro {
   votos: number;
   created_at: string;
 }
+
+export interface AcaoRetro {
+  id: string;
+  sessao_id: string;
+  item_id?: string | null;
+  descricao: string;
+  responsavel?: string | null;
+  concluido: boolean;
+  created_at?: string;
+}
+

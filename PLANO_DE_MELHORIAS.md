@@ -7,11 +7,11 @@ Este documento consolida a estratégia de evolução do **Bugzinho Retro**, orga
 ## 📌 Fase 1: Encerramento do Ciclo & Rastreabilidade (Prioridade Alta - P0)
 > **Objetivo:** Garantir que a retrospectiva gere resultados práticos (Planos de Ação) e preservar o histórico dos post-its originais agrupados pela IA.
 
-- [ ] **1.1 Fase de Plano de Ação (Action Items)**
-  - [ ] Adicionar o status `'ACOES'` ao enum `SessaoStatus` em [`src/types/database.ts`](file:///C:/Projetos/CoE/retro-bugzinho/src/types/database.ts).
-  - [ ] Criar tabela `acoes_retro` no Supabase (`id`, `sessao_id`, `item_id`, `descricao`, `responsavel`, `concluido`, `created_at`).
-  - [ ] Criar componente `FaseAcoes` para listagem e criação de tarefas vinculadas aos cards mais votados.
-  - [ ] Atualizar o painel do Dealer em [`src/app/sala/[id]/page.tsx`](file:///C:/Projetos/CoE/retro-bugzinho/src/app/sala/%5Bid%5D/page.tsx) para incluir o botão "Definir Ações".
+- [x] **1.1 Fase de Plano de Ação (Action Items)**
+  - [x] Adicionar o status `'ACOES'` ao enum `SessaoStatus` em [`src/types/database.ts`](file:///C:/Projetos/CoE/retro-bugzinho/src/types/database.ts).
+  - [x] Criar tabela `acoes_retro` no Supabase (`id`, `sessao_id`, `item_id`, `descricao`, `responsavel`, `concluido`, `created_at`).
+  - [x] Criar componente `FaseAcoes` para listagem e criação de tarefas vinculadas aos cards mais votados.
+  - [x] Atualizar o painel do Dealer em [`src/app/sala/[id]/page.tsx`](file:///C:/Projetos/CoE/retro-bugzinho/src/app/sala/%5Bid%5D/page.tsx) para incluir o botão "Definir Ações".
 
 - [ ] **1.2 Rastreabilidade dos Cards Agrupados (Drill-down de IA)**
   - [ ] Alterar a rota [`src/app/api/agrupar/route.ts`](file:///C:/Projetos/CoE/retro-bugzinho/src/app/api/agrupar/route.ts) para não deletar os cards originais, salvando uma referência `parent_id` ou usando uma tabela relacional de agrupamento.

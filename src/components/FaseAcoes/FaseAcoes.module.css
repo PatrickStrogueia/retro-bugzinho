@@ -1,0 +1,230 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.header {
+  text-align: center;
+}
+
+.title {
+  color: var(--casino-gold);
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.subtitle {
+  color: var(--text-secondary);
+}
+
+.formBox {
+  background: var(--bg-surface);
+  border: 1px solid var(--bg-surface-hover);
+  border-radius: 12px;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.formTitle {
+  color: var(--casino-green);
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+.formRow {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.selectWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  flex: 1;
+  min-width: 240px;
+}
+
+.selectLabel {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.selectInput {
+  background-color: var(--bg-color);
+  border: 1px solid var(--bg-surface-hover);
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  color: var(--text-primary);
+  font-family: inherit;
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.selectInput:focus {
+  border-color: var(--casino-gold);
+}
+
+.formActions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 0.5rem;
+}
+
+.listaAcoes {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.listaTitle {
+  color: var(--text-primary);
+  font-size: 1.25rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.badgeContador {
+  background: rgba(251, 191, 36, 0.15);
+  color: var(--casino-gold);
+  border: 1px solid var(--casino-gold);
+  border-radius: 99px;
+  padding: 0.25rem 0.75rem;
+  font-size: 0.85rem;
+}
+
+.cardAcao {
+  background: var(--bg-surface);
+  border: 1px solid var(--bg-surface-hover);
+  border-radius: 10px;
+  padding: 1.25rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  transition: transform 0.15s ease, border-color 0.2s ease;
+}
+
+.cardAcao:hover {
+  border-color: var(--casino-gold);
+}
+
+.cardAcaoConcluido {
+  opacity: 0.65;
+  background: rgba(13, 19, 17, 0.6);
+  border-color: rgba(16, 185, 129, 0.3);
+}
+
+.checkboxContainer {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 0.2rem;
+}
+
+.checkbox {
+  width: 22px;
+  height: 22px;
+  accent-color: var(--casino-green);
+  cursor: pointer;
+}
+
+.conteudoAcao {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.descricao {
+  font-size: 1.05rem;
+  color: var(--text-primary);
+  line-height: 1.4;
+}
+
+.descricaoRiscada {
+  text-decoration: line-through;
+  color: var(--text-secondary);
+}
+
+.metaRow {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  font-size: 0.85rem;
+}
+
+.badgeTopico {
+  background: rgba(16, 185, 129, 0.15);
+  color: var(--casino-green);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  padding: 0.2rem 0.6rem;
+  border-radius: 6px;
+  max-width: 300px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.responsavel {
+  color: var(--casino-gold);
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.btnDeletar {
+  background: transparent;
+  color: var(--text-secondary);
+  border: none;
+  padding: 0.4rem 0.6rem;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  transition: color 0.2s ease, background-color 0.2s ease;
+}
+
+.btnDeletar:hover {
+  color: var(--casino-red);
+  background: rgba(239, 68, 68, 0.1);
+}
+
+.emptyState {
+  text-align: center;
+  color: var(--text-secondary);
+  padding: 2.5rem;
+  background: var(--bg-surface);
+  border: 1px dashed var(--bg-surface-hover);
+  border-radius: 12px;
+}
+
+@media (max-width: 640px) {
+  .title {
+    font-size: 1.4rem;
+  }
+
+  .formRow {
+    flex-direction: column;
+  }
+
+  .cardAcao {
+    padding: 1rem;
+  }
+}

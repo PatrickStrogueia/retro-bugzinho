@@ -10,6 +10,7 @@ import { Input } from "@/components/Input/Input";
 import { FaseColeta } from "@/components/FaseColeta/FaseColeta";
 import { FaseVotacao } from "@/components/FaseVotacao/FaseVotacao";
 import { FaseResultados } from "@/components/FaseResultados/FaseResultados";
+import { FaseAcoes } from "@/components/FaseAcoes/FaseAcoes";
 import { SlotMachine } from "@/components/SlotMachine/SlotMachine";
 import { FaseLobby } from "@/components/FaseLobby/FaseLobby";
 import styles from "./page.module.css";
@@ -191,6 +192,10 @@ export default function SalaDeRetrospectiva() {
         <FaseResultados sessaoId={sessaoId} />
       )}
 
+      {statusSessao === "ACOES" && (
+        <FaseAcoes sessaoId={sessaoId} isAdmin={isAdmin} />
+      )}
+
       {/* PAINEL DO DEALER (Apenas para o Admin) */}
       {isAdmin && (
         <div className={styles.painelDealer}>
@@ -202,6 +207,7 @@ export default function SalaDeRetrospectiva() {
               {isProcessingAI ? "IA Agrupando..." : "Iniciar Votação"}
             </Button>
             <Button variant="gold" onClick={() => avancarFase("RESULTADOS")} disabled={statusSessao === "RESULTADOS"}>Revelar Resultados</Button>
+            <Button variant="gold" onClick={() => avancarFase("ACOES")} disabled={statusSessao === "ACOES"}>Definir Ações 🎯</Button>
           </div>
         </div>
       )}
