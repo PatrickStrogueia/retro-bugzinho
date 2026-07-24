@@ -28,8 +28,8 @@ Este documento consolida a estratégia de evolução do **Bugzinho Retro**, orga
 
 - [ ] **2.2 Exportação e Relatório da Retro**
   - [ ] Criar modal de exportação na tela de Resultados / Plano de Ação.
-  - [ ] Opção de copiar resumo estruturado em **Markdown** (pronto para Notion / GitHub / Azure DevOps).
-  - [ ] Opção de exportar resumo para envio direto via webhook ou formatação para **Slack / Teams**.
+  - [ ] Opção de copiar resumo estruturado da retrospectiva em **Markdown** (pronto para Notion / GitHub / Azure DevOps).
+  - [ ] Opção de exportar resumo estruturado em arquivo **.md**.
 
 - [ ] **2.3 Análise de Clima e Sentimento da Sprint**
   - [ ] Adicionar um widget no topo da tela de Resultados exibindo o tom geral da sprint (ex: *"75% Positivo / Destaque para Infraestrutura"*) analisado pelo Gemini.
