@@ -22,9 +22,9 @@ Este documento consolida a estratégia de evolução do **Bugzinho Retro**, orga
 ## 🧠 Fase 2: Inteligência com Google Gemini & Exportação (Prioridade Média - P1)
 > **Objetivo:** Aproveitar a IA para acelerar a tomada de decisão e facilitar o compartilhamento dos resultados com a liderança e a equipe.
 
-- [ ] **2.1 Gerador Automático de Action Items por IA**
-  - [ ] Criar a rota `/api/gerar-acoes` utilizando o SDK `@google/genai` para ler os tópicos mais votados e sugerir propostas de ação no padrão S.M.A.R.T.
-  - [ ] Adicionar botão no painel do Dealer: *"🪄 Sugerir Ações com IA"*.
+- [x] **2.1 Gerador Automático de Action Items por IA**
+  - [x] Criar a rota `/api/gerar-acoes` utilizando o SDK `@google/genai` para ler os tópicos mais votados e sugerir propostas de ação no padrão S.M.A.R.T.
+  - [x] Adicionar botão no painel do Dealer: *"🪄 Sugerir Ações com IA"*.
 
 - [ ] **2.2 Exportação e Relatório da Retro**
   - [ ] Criar modal de exportação na tela de Resultados / Plano de Ação.

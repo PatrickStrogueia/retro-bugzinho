@@ -25,6 +25,7 @@ export default function SalaDeRetrospectiva() {
   const [loading, setLoading] = useState(true);
   const [isAdmin, setIsAdmin] = useState(false);
   const [isProcessingAI, setIsProcessingAI] = useState(false);
+  const [isGeneratingActions, setIsGeneratingActions] = useState(false);
 
   // 1. Busca o status inicial da sala e verifica se a pessoa já entrou e se é Admin
   useEffect(() => {
@@ -91,6 +92,28 @@ export default function SalaDeRetrospectiva() {
       .from("sessoes")
       .update({ status: novoStatus })
       .eq("id", sessaoId);
+  };
+
+  const sugerirAcoes = async () => {
+    if (!isAdmin) return;
+    setIsGeneratingActions(true);
+    try {
+      const res = await fetch("/api/gerar-acoes", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ sessaoId }),
+      });
+      
+      if (!res.ok) {
+        console.error("Erro ao gerar ações com IA");
+        alert("Erro ao sugerir ações. Tente novamente.");
+      }
+    } catch (error) {
+      console.error("Erro ao chamar API de gerar ações:", error);
+      alert("Erro ao conectar com a API.");
+    } finally {
+      setIsGeneratingActions(false);
+    }
   };
 
   // 2. Escuta mudanças de fase em tempo real
@@ -208,6 +231,11 @@ export default function SalaDeRetrospectiva() {
             </Button>
             <Button variant="gold" onClick={() => avancarFase("RESULTADOS")} disabled={statusSessao === "RESULTADOS"}>Revelar Resultados</Button>
             <Button variant="gold" onClick={() => avancarFase("ACOES")} disabled={statusSessao === "ACOES"}>Definir Ações 🎯</Button>
+            {statusSessao === "ACOES" && (
+              <Button variant="primary" onClick={sugerirAcoes} disabled={isGeneratingActions}>
+                {isGeneratingActions ? "Processando..." : "🪄 Sugerir Ações com IA"}
+              </Button>
+            )}
           </div>
         </div>
       )}
