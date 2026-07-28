@@ -18,16 +18,9 @@ export const FaseResultados = ({ sessaoId, isAdmin }: FaseResultadosProps) => {
   const [loading, setLoading] = useState(true);
   const [showConfetti, setShowConfetti] = useState(true);
   const winSize = typeof window !== "undefined" ? { w: window.innerWidth, h: window.innerHeight } : { w: 1000, h: 800 };
-  const victorySoundRef = useRef<HTMLAudioElement | null>(null);
+
 
   useEffect(() => {
-    victorySoundRef.current = new Audio("https://actions.google.com/sounds/v1/cartoon/clown_horn.ogg"); // A simple victory sound? Let's use a bell or pop
-    // Actually, a nice subtle chime or applause is better. Let's use "xylophone" or "magic"
-    // Wait, let's use: https://actions.google.com/sounds/v1/foley/glass_clink.ogg? No, let's just use window audio
-    victorySoundRef.current = new Audio("https://actions.google.com/sounds/v1/cartoon/cartoon_boing.ogg");
-    if (victorySoundRef.current) victorySoundRef.current.volume = 0.3;
-    victorySoundRef.current?.play().catch(e => console.log(e));
-
     const timer = setTimeout(() => setShowConfetti(false), 5000);
     return () => clearTimeout(timer);
   }, []);
