@@ -117,7 +117,13 @@ export const FaseVotacao = ({ sessaoId }: FaseVotacaoProps) => {
       </div>
 
       <div className={styles.gridCartas}>
-        {itens.filter(i => !i.parent_id).map((item) => {
+        {itens
+          .filter(i => !i.parent_id)
+          .sort((a, b) => {
+            const order: Record<string, number> = { improve: 1, bad: 2, good: 3 };
+            return (order[a.tipo] || 99) - (order[b.tipo] || 99);
+          })
+          .map((item) => {
           const jaVotei = meusVotos.includes(item.id);
           const semFichas = fichasRestantes <= 0;
           const filhos = itens.filter(i => i.parent_id === item.id);
