@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
+import Confetti from "react-confetti";
 import { supabase } from "@/lib/supabase";
 import { Card } from "../Card/Card";
 import { ItemRetro } from "@/types/database";
@@ -15,6 +16,21 @@ interface FaseResultadosProps {
 export const FaseResultados = ({ sessaoId, isAdmin }: FaseResultadosProps) => {
   const [itens, setItens] = useState<ItemRetro[]>([]);
   const [loading, setLoading] = useState(true);
+  const [showConfetti, setShowConfetti] = useState(true);
+  const winSize = typeof window !== "undefined" ? { w: window.innerWidth, h: window.innerHeight } : { w: 1000, h: 800 };
+  const victorySoundRef = useRef<HTMLAudioElement | null>(null);
+
+  useEffect(() => {
+    victorySoundRef.current = new Audio("https://actions.google.com/sounds/v1/cartoon/clown_horn.ogg"); // A simple victory sound? Let's use a bell or pop
+    // Actually, a nice subtle chime or applause is better. Let's use "xylophone" or "magic"
+    // Wait, let's use: https://actions.google.com/sounds/v1/foley/glass_clink.ogg? No, let's just use window audio
+    victorySoundRef.current = new Audio("https://actions.google.com/sounds/v1/cartoon/cartoon_boing.ogg");
+    if (victorySoundRef.current) victorySoundRef.current.volume = 0.5;
+    victorySoundRef.current?.play().catch(e => console.log(e));
+
+    const timer = setTimeout(() => setShowConfetti(false), 5000);
+    return () => clearTimeout(timer);
+  }, []);
 
   useEffect(() => {
     const buscarItens = async () => {
@@ -35,6 +51,7 @@ export const FaseResultados = ({ sessaoId, isAdmin }: FaseResultadosProps) => {
 
   return (
     <div className={styles.container}>
+      {showConfetti && <Confetti width={winSize.w} height={winSize.h} recycle={false} numberOfPieces={300} colors={['#FBBF24', '#10B981', '#EF4444', '#3B82F6', '#8B5CF6']} />}
       <div className={styles.header}>
         <h3 className={styles.title}>
           Resultados da Rodada 

@@ -62,6 +62,6 @@ Este documento consolida a estratégia de evolução do **Bugzinho Retro**, orga
   - [x] Template *4L's* (Liked, Learned, Lacked, Longed for).
   - [x] Template *Sailboat* (Vento, Âncora, Pedra, Ilha).
 
-- [ ] **4.3 Efeitos Sonoros & Animações Visuais**
-  - [ ] Efeitos sonoros (SFX) ao colocar ficha na carta e ao submeter card.
-  - [ ] Efeito de chuva de fichas de ouro / confetes ao revelar os vencedores na Fase de Resultados.
+- [x] **4.3 Efeitos Sonoros & Animações Visuais**
+  - [x] Efeitos sonoros (SFX) ao colocar ficha na carta e ao submeter card.
+  - [x] Chuva de confetes (ou fichas de ouro caindo) ao entrar na fase de "Resultados" e revelar as cartas vencedoras. na Fase de Resultados.

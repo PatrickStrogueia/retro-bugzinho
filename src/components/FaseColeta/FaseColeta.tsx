@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { supabase } from "@/lib/supabase";
 import { Button } from "../Button/Button";
 import { Input } from "../Input/Input";
@@ -45,9 +45,13 @@ export const FaseColeta = ({ sessaoId }: FaseColetaProps) => {
   const [meusCartoesIds, setMeusCartoesIds] = useState<string[]>([]);
   const [editandoId, setEditandoId] = useState<string | null>(null);
   const [textoEditado, setTextoEditado] = useState("");
+  const cardSoundRef = useRef<HTMLAudioElement | null>(null);
 
   // Carrega IDs do localStorage
   useEffect(() => {
+    cardSoundRef.current = new Audio("https://actions.google.com/sounds/v1/cartoon/pop.ogg");
+    if (cardSoundRef.current) cardSoundRef.current.volume = 0.5;
+
     const saved = localStorage.getItem(`meus_cartoes_${sessaoId}`);
     if (saved) {
       setMeusCartoesIds(JSON.parse(saved));
@@ -129,6 +133,7 @@ export const FaseColeta = ({ sessaoId }: FaseColetaProps) => {
       alert("Erro ao enviar item. Tente novamente.");
       console.error(error);
     } else if (data) {
+      cardSoundRef.current?.play().catch(e => console.log(e));
       setTexto(""); // Limpa o input após enviar com sucesso
       setMeusCartoesIds((prev) => {
         if (prev.includes(data.id)) return prev;

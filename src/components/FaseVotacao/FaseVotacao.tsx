@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { supabase } from "@/lib/supabase";
 import { Card } from "../Card/Card";
 import { PokerChip } from "../PokerChip/PokerChip";
@@ -17,12 +17,16 @@ export const FaseVotacao = ({ sessaoId }: FaseVotacaoProps) => {
   const [loading, setLoading] = useState(true);
   const [meusVotos, setMeusVotos] = useState<string[]>([]);
   const [configVotacao, setConfigVotacao] = useState({ max_fichas: 5, aposta_livre: false });
+  const chipSoundRef = useRef<HTMLAudioElement | null>(null);
   
   const MAX_VOTOS = configVotacao.max_fichas;
   const fichasRestantes = MAX_VOTOS - meusVotos.length;
 
   // Busca os itens, escuta atualizações e recupera os votos locais
   useEffect(() => {
+    chipSoundRef.current = new Audio("https://actions.google.com/sounds/v1/foley/glass_clink.ogg");
+    if (chipSoundRef.current) chipSoundRef.current.volume = 0.5;
+
     const buscarItens = async () => {
       const { data, error } = await supabase
         .from("itens_retro")
@@ -78,6 +82,12 @@ export const FaseVotacao = ({ sessaoId }: FaseVotacaoProps) => {
 
   // Função para adicionar ou remover voto
   const toggleVoto = async (item: ItemRetro) => {
+    chipSoundRef.current?.cloneNode(true).dispatchEvent(new Event('play')); // Clone to allow rapid clicking
+    try {
+      const audioClone = chipSoundRef.current?.cloneNode(true) as HTMLAudioElement;
+      audioClone?.play().catch(e => console.log(e));
+    } catch(e){}
+
     const jaVotei = meusVotos.includes(item.id);
     const qtdVotosNesteItem = meusVotos.filter(id => id === item.id).length;
 
