@@ -16,8 +16,9 @@ export const FaseVotacao = ({ sessaoId }: FaseVotacaoProps) => {
   const [itens, setItens] = useState<ItemRetro[]>([]);
   const [loading, setLoading] = useState(true);
   const [meusVotos, setMeusVotos] = useState<string[]>([]);
+  const [configVotacao, setConfigVotacao] = useState({ max_fichas: 5, aposta_livre: false });
   
-  const MAX_VOTOS = 5;
+  const MAX_VOTOS = configVotacao.max_fichas;
   const fichasRestantes = MAX_VOTOS - meusVotos.length;
 
   // Busca os itens, escuta atualizações e recupera os votos locais
@@ -30,6 +31,17 @@ export const FaseVotacao = ({ sessaoId }: FaseVotacaoProps) => {
         .order("created_at", { ascending: true }); 
 
       if (data) setItens(data);
+      
+      const { data: sessaoData } = await supabase
+        .from("sessoes")
+        .select("config_votacao")
+        .eq("id", sessaoId)
+        .single();
+        
+      if (sessaoData?.config_votacao) {
+        setConfigVotacao(sessaoData.config_votacao);
+      }
+      
       setLoading(false);
     };
 
@@ -67,8 +79,12 @@ export const FaseVotacao = ({ sessaoId }: FaseVotacaoProps) => {
   // Função para adicionar ou remover voto
   const toggleVoto = async (item: ItemRetro) => {
     const jaVotei = meusVotos.includes(item.id);
+    const qtdVotosNesteItem = meusVotos.filter(id => id === item.id).length;
 
-    if (jaVotei) {
+    // Se já votou e Aposta Livre for falsa, o clique deve REMOVER o voto
+    // Se Aposta Livre for verdadeira, o clique na ficha vai ADICIONAR (até acabar as fichas).
+    // Para remover na Aposta Livre, o usuário clica no "Retirar ficha".
+    if (jaVotei && !configVotacao.aposta_livre) {
       // Remover voto
       const novosMeusVotos = meusVotos.filter(id => id !== item.id);
       setMeusVotos(novosMeusVotos);
@@ -111,6 +127,23 @@ export const FaseVotacao = ({ sessaoId }: FaseVotacaoProps) => {
     if (error) {
       console.error("Erro ao votar:", error);
     }
+  };
+
+  const removerUmVoto = async (item: ItemRetro) => {
+    if (!meusVotos.includes(item.id)) return;
+    
+    // Remove apenas a PRIMEIRA ocorrência do ID (para aposta livre)
+    const index = meusVotos.indexOf(item.id);
+    const novosMeusVotos = [...meusVotos];
+    novosMeusVotos.splice(index, 1);
+    
+    setMeusVotos(novosMeusVotos);
+    localStorage.setItem(`bugzinho_votos_${sessaoId}`, JSON.stringify(novosMeusVotos));
+
+    const novosVotos = Math.max(0, item.votos - 1);
+    setItens((prev) => prev.map(i => i.id === item.id ? { ...i, votos: novosVotos } : i));
+
+    await supabase.from("itens_retro").update({ votos: novosVotos }).eq("id", item.id);
   };
 
   if (loading) return <div style={{ textAlign: "center" }}>Carregando as cartas da mesa...</div>;
@@ -160,8 +193,8 @@ export const FaseVotacao = ({ sessaoId }: FaseVotacaoProps) => {
               
               <div className={styles.areaVoto}>
                 <div 
-                  style={{ opacity: jaVotei ? 0.7 : 1, filter: jaVotei ? "grayscale(80%)" : "none", cursor: "pointer" }} 
-                  title={jaVotei ? "Clique para remover sua ficha" : "Adicionar ficha"}
+                  style={{ opacity: (jaVotei && !configVotacao.aposta_livre) ? 0.7 : 1, filter: (jaVotei && !configVotacao.aposta_livre) ? "grayscale(80%)" : "none", cursor: "pointer" }} 
+                  title={(jaVotei && !configVotacao.aposta_livre) ? "Clique para remover sua ficha" : "Adicionar ficha"}
                 >
                   <PokerChip 
                     value={1} 
@@ -176,9 +209,9 @@ export const FaseVotacao = ({ sessaoId }: FaseVotacaoProps) => {
               {jaVotei && (
                 <div 
                   style={{ textAlign: "center", fontSize: "0.75rem", color: "var(--casino-red)", marginTop: "-0.5rem", cursor: "pointer", fontWeight: "bold" }}
-                  onClick={() => toggleVoto(item)}
+                  onClick={() => configVotacao.aposta_livre ? removerUmVoto(item) : toggleVoto(item)}
                 >
-                  ✖ Retirar ficha
+                  ✖ Retirar ficha {configVotacao.aposta_livre && `(${meusVotos.filter(id => id === item.id).length})`}
                 </div>
               )}
             </div>

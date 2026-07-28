@@ -49,12 +49,13 @@ Este documento consolida a estratégia de evolução do **Bugzinho Retro**, orga
 
 ---
 
-## 🎨 Fase 4: Polimento, Gamificação & Templates (Prioridade Baixa - P3)
-> **Objetivo:** Elevar o nível de imersão no tema de cassino e permitir diferentes dinâmicas de retrospectiva.
+## 🎲 Fase 4: Polimento, Gamificação & Templates (Prioridade Baixa - P3)
+> **Objetivo:** Adicionar a cereja do bolo, melhorando a imersão do cassino e a flexibilidade da ferramenta.
 
-- [ ] **4.1 Configuração Customizada pelo Dealer**
-  - [ ] Permitir definir número de fichas por participante ao criar a sala (ex: 3, 5 ou 10 fichas).
-  - [ ] Permitir alternar entre Voto Único por card ou Voto Acumulativo.
+- [x] **4.1 Configuração Customizada pelo Dealer**
+  - [x] Permitir que o Dealer escolha a quantidade de fichas de votação (ex: 3, 5, 10).
+  - [x] Permitir que o Dealer escolha o modo de votação: "Aposta Livre" (várias fichas na mesma carta) ou "Uma Ficha por Carta".
+  - [x] A configuração deve ser salva na tabela `sessoes` (`config_votacao` JSONB).
 
 - [ ] **4.2 Múltiplos Templates de Retrospectiva**
   - [ ] Template *Starfish* (Keep, More, Less, Start, Stop).

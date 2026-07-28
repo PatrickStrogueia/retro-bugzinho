@@ -163,3 +163,78 @@
     margin-bottom: 2rem;
   }
 }
+
+.adminSection {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  align-items: center;
+  margin-top: 2rem;
+  width: 100%;
+}
+
+.configBox {
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(251, 191, 36, 0.3);
+  border-radius: 12px;
+  padding: 1.5rem;
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  text-align: left;
+}
+
+.configTitle {
+  color: var(--casino-gold);
+  font-size: 1.1rem;
+  margin: 0 0 0.5rem 0;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  padding-bottom: 0.5rem;
+}
+
+.configRow {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  color: var(--text-primary);
+  font-size: 0.9rem;
+}
+
+.selectInput {
+  background: var(--bg-surface);
+  color: white;
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 0.5rem;
+  border-radius: 6px;
+  font-family: inherit;
+}
+
+.checkboxLabel {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+}
+
+.saveBtn {
+  background: var(--casino-gold);
+  color: #000;
+  border: none;
+  border-radius: 6px;
+  padding: 0.75rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: opacity 0.2s;
+  margin-top: 0.5rem;
+}
+
+.saveBtn:hover {
+  opacity: 0.9;
+}
+
+.saveBtn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

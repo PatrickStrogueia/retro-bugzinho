@@ -8,6 +8,10 @@ export interface Sessao {
   status: SessaoStatus;
   clima?: any | null;
   timer_state?: any | null;
+  config_votacao?: {
+    max_fichas: number;
+    aposta_livre: boolean;
+  } | null;
 }
 
 export interface Participante {

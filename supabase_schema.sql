@@ -22,3 +22,6 @@ ALTER TABLE sessoes ADD COLUMN IF NOT EXISTS clima JSONB;
 
 -- Alteração para a Fase 3.1: Adicionar estado do cronômetro
 ALTER TABLE sessoes ADD COLUMN IF NOT EXISTS timer_state JSONB DEFAULT '{"status": "IDLE", "endsAt": null, "duration": 0}'::jsonb;
+
+-- Alteração para a Fase 4.1: Configuração customizada pelo Dealer
+ALTER TABLE sessoes ADD COLUMN IF NOT EXISTS config_votacao JSONB DEFAULT '{"max_fichas": 5, "aposta_livre": false}'::jsonb;
