@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useParams } from "next/navigation";
 import { supabase } from "@/lib/supabase";
 import { SessaoStatus } from "@/types/database";
@@ -28,6 +28,17 @@ export default function SalaDeRetrospectiva() {
   const [isAdmin, setIsAdmin] = useState(false);
   const [isProcessingAI, setIsProcessingAI] = useState(false);
   const [isGeneratingActions, setIsGeneratingActions] = useState(false);
+  const audioRef = useRef<HTMLAudioElement>(null);
+
+  // Define volume do som ambiente
+  useEffect(() => {
+    if (audioRef.current) {
+      audioRef.current.volume = 0.3;
+      // Auto-play is only reliably triggered by user interaction, but since the dealer
+      // probably interacted to create the room, it might work.
+      audioRef.current.play().catch(() => {});
+    }
+  }, []);
 
   // 1. Busca o status inicial da sala e verifica se a pessoa já entrou e se é Admin
   useEffect(() => {
@@ -248,6 +259,10 @@ export default function SalaDeRetrospectiva() {
                 {isGeneratingActions ? "Processando..." : "🪄 Sugerir Ações com IA"}
               </Button>
             )}
+          </div>
+          <div style={{ marginTop: '1.5rem', display: 'flex', alignItems: 'center', gap: '1rem', borderTop: '1px solid rgba(255,255,255,0.1)', paddingTop: '1rem' }}>
+            <span style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', fontWeight: 'bold' }}>Som Ambiente 🎵</span>
+            <audio ref={audioRef} controls loop src="/casino-lounge.mp3" style={{ height: '30px', filter: 'invert(0.8)' }} />
           </div>
         </div>
       )}

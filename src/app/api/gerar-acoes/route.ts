@@ -56,7 +56,7 @@ Certifique-se de retornar APENAS o JSON válido, sem markdown extra.
     `;
 
     // 3. Call Gemini
-    const modelo = "gemini-3.5-flash";
+    const modelo = "gemini-3.6-flash";
     let generatedText: string | undefined;
 
     try {

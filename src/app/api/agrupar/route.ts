@@ -58,7 +58,7 @@ Certifique-se de retornar APENAS o JSON válido, no formato de uma lista.
     `;
 
     // 3. Call Gemini with retry logic
-    const modelo = "gemini-3.5-flash";
+    const modelo = "gemini-3.6-flash";
     const MAX_TENTATIVAS = 3;
     const DELAY_BASE_MS = 2000; // 2s, 4s, 8s...
 

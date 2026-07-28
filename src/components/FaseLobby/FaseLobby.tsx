@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { supabase } from "@/lib/supabase";
 import styles from "./FaseLobby.module.css";
 
@@ -10,7 +10,6 @@ interface FaseLobbyProps {
 }
 
 export const FaseLobby = ({ sessaoId, isAdmin }: FaseLobbyProps) => {
-  const audioRef = useRef<HTMLAudioElement>(null);
   const [maxFichas, setMaxFichas] = useState(5);
   const [apostaLivre, setApostaLivre] = useState(false);
   const [template, setTemplate] = useState("classic");
@@ -36,18 +35,6 @@ export const FaseLobby = ({ sessaoId, isAdmin }: FaseLobbyProps) => {
     if (error) alert("Erro ao salvar configuração (verifique se rodou o ALTER TABLE config_votacao)");
     setSalvando(false);
   };
-
-  // Auto play the audio when the component mounts
-  useEffect(() => {
-    if (audioRef.current) {
-      audioRef.current.volume = 0.3; // Low volume for background music
-      // Note: Browsers usually block autoplay unless the user has interacted with the page.
-      // Since the Admin clicked "Criar Nova Sala" to get here, it should autoplay for them.
-      // For participants who just land on the URL, they might need to click somewhere,
-      // so we provide controls or they can just interact to unmute.
-      audioRef.current.play().catch(e => console.log("Autoplay prevented by browser:", e));
-    }
-  }, []);
 
   return (
     <div className={styles.container}>
@@ -111,13 +98,6 @@ export const FaseLobby = ({ sessaoId, isAdmin }: FaseLobbyProps) => {
               <button className={styles.saveBtn} onClick={salvarConfig} disabled={salvando}>
                 {salvando ? "Salvando..." : "Salvar Regras da Mesa"}
               </button>
-            </div>
-
-            <div className={styles.audioPlayer}>
-              <p className={styles.audioLabel}>
-                Som Ambiente <span style={{ marginLeft: '4px' }}>🎵</span>
-              </p>
-              <audio ref={audioRef} controls loop src="/casino-lounge.mp3" />
             </div>
           </div>
         )}
