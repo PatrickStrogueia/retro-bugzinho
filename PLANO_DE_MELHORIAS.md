@@ -43,9 +43,9 @@ Este documento consolida a estratégia de evolução do **Bugzinho Retro**, orga
   - [x] Criar componente `Timer` regressivo configurável pelo Dealer (ex: 3min, 5min) para a fase de discussão dos tópicos.
   - [x] Tocar alerta sonoro temático ao expirar o tempo com opção de estender o tempo.
 
-- [ ] **3.2 Presença Real-time ("Jogadores na Mesa")**
-  - [ ] Exibir no Header a lista de participantes conectados à sala em tempo real com indicador de estado (`Online`, `Card enviado`, `Votação concluída`).
-  - [ ] Mostrar indicador visual no painel do Dealer quando todos os participantes finalizarem seus votos.
+- [x] **3.2 Presença Real-time ("Jogadores na Mesa")**
+  - [x] Exibir no Header a lista de participantes conectados à sala em tempo real com indicador de estado (`Online`, `Card enviado`, `Votação concluída`).
+  - [x] Mostrar indicador visual no painel do Dealer quando todos os participantes finalizarem seus votos.
 
 ---
 

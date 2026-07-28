@@ -14,6 +14,7 @@ import { FaseAcoes } from "@/components/FaseAcoes/FaseAcoes";
 import { SlotMachine } from "@/components/SlotMachine/SlotMachine";
 import { FaseLobby } from "@/components/FaseLobby/FaseLobby";
 import { Timer } from "@/components/Timer/Timer";
+import { PresencaMesa } from "@/components/PresencaMesa/PresencaMesa";
 import styles from "./page.module.css";
 
 export default function SalaDeRetrospectiva() {
@@ -195,6 +196,13 @@ export default function SalaDeRetrospectiva() {
         <h2>Fase Atual: {statusSessao}</h2>
         <span className={styles.salaId}>ID da Sala: {sessaoId}</span>
       </div>
+
+      <PresencaMesa 
+        sessaoId={sessaoId} 
+        participanteId={participanteId} 
+        nome={nome} 
+        statusSessao={statusSessao} 
+      />
 
       {statusSessao === "LOBBY" && (
         <FaseLobby sessaoId={sessaoId} isAdmin={isAdmin} />

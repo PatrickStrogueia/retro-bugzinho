@@ -1,0 +1,66 @@
+.presencaContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1rem;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  margin-bottom: 1.5rem;
+  width: 100%;
+}
+
+.title {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 600;
+}
+
+.usersList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.userBadge {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--bg-color);
+  border: 1px solid var(--border-color);
+  padding: 0.35rem 0.75rem;
+  border-radius: 99px;
+  font-size: 0.9rem;
+  transition: border-color 0.2s ease;
+  cursor: default;
+}
+
+.userBadge:hover {
+  border-color: var(--casino-green);
+}
+
+.statusDot {
+  width: 8px;
+  height: 8px;
+  background-color: var(--casino-green);
+  border-radius: 50%;
+  box-shadow: 0 0 8px var(--casino-green);
+  animation: pulse 2s infinite alternate;
+}
+
+.userName {
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+.youLabel {
+  font-size: 0.8rem;
+  color: var(--casino-gold);
+}
+
+@keyframes pulse {
+  0% { opacity: 0.6; box-shadow: 0 0 4px var(--casino-green); }
+  100% { opacity: 1; box-shadow: 0 0 10px var(--casino-green); }
+}
