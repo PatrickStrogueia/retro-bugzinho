@@ -13,6 +13,7 @@ export const FaseLobby = ({ sessaoId, isAdmin }: FaseLobbyProps) => {
   const audioRef = useRef<HTMLAudioElement>(null);
   const [maxFichas, setMaxFichas] = useState(5);
   const [apostaLivre, setApostaLivre] = useState(false);
+  const [template, setTemplate] = useState("classic");
   const [salvando, setSalvando] = useState(false);
 
   useEffect(() => {
@@ -21,6 +22,7 @@ export const FaseLobby = ({ sessaoId, isAdmin }: FaseLobbyProps) => {
       if (!error && data?.config_votacao) {
         setMaxFichas(data.config_votacao.max_fichas ?? 5);
         setApostaLivre(data.config_votacao.aposta_livre ?? false);
+        setTemplate(data.config_votacao.template || "classic");
       }
     };
     fetchConfig();
@@ -29,7 +31,7 @@ export const FaseLobby = ({ sessaoId, isAdmin }: FaseLobbyProps) => {
   const salvarConfig = async () => {
     setSalvando(true);
     const { error } = await supabase.from("sessoes").update({
-      config_votacao: { max_fichas: maxFichas, aposta_livre: apostaLivre }
+      config_votacao: { max_fichas: maxFichas, aposta_livre: apostaLivre, template: template }
     }).eq("id", sessaoId);
     if (error) alert("Erro ao salvar configuração (verifique se rodou o ALTER TABLE config_votacao)");
     setSalvando(false);
@@ -79,6 +81,16 @@ export const FaseLobby = ({ sessaoId, isAdmin }: FaseLobbyProps) => {
             <div className={styles.configBox}>
               <h3 className={styles.configTitle}>⚙️ Regras da Mesa (Votação)</h3>
               
+              <div className={styles.configRow}>
+                <label>Template da Retro:</label>
+                <select className={styles.selectInput} value={template} onChange={e => setTemplate(e.target.value)}>
+                  <option value="classic">Clássico (Bom, Ruim, Melhorias)</option>
+                  <option value="starfish">Starfish (Keep, More, Less, Start, Stop)</option>
+                  <option value="4ls">4 L's (Liked, Learned, Lacked, Longed for)</option>
+                  <option value="sailboat">Sailboat (Vento, Âncora, Pedra, Ilha)</option>
+                </select>
+              </div>
+
               <div className={styles.configRow}>
                 <label>Fichas por Jogador:</label>
                 <select className={styles.selectInput} value={maxFichas} onChange={e => setMaxFichas(Number(e.target.value))}>

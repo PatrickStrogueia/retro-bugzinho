@@ -47,27 +47,27 @@
 }
 
 /* Card variants by retro type */
-.good::before {
+.good::before, .keep::before, .more::before, .liked::before, .wind::before, .longed::before {
   background-color: var(--casino-green);
   box-shadow: 0 0 15px var(--casino-green);
 }
-.good:hover {
+.good:hover, .keep:hover, .more:hover, .liked:hover, .wind:hover, .longed:hover {
   box-shadow: 0 30px 50px -15px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 -5px 30px -10px var(--casino-green);
 }
 
-.bad::before {
+.bad::before, .less::before, .stop::before, .lacked::before, .anchor::before, .rock::before {
   background-color: var(--casino-red);
   box-shadow: 0 0 15px rgba(239, 68, 68, 0.8);
 }
-.bad:hover {
+.bad:hover, .less:hover, .stop:hover, .lacked:hover, .anchor:hover, .rock:hover {
   box-shadow: 0 30px 50px -15px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 -5px 30px -10px var(--casino-red);
 }
 
-.improve::before {
+.improve::before, .start::before, .learned::before, .island::before {
   background-color: var(--casino-gold);
   box-shadow: 0 0 15px rgba(251, 191, 36, 0.8);
 }
-.improve:hover {
+.improve:hover, .start:hover, .learned:hover, .island:hover {
   box-shadow: 0 30px 50px -15px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 -5px 30px -10px var(--casino-gold);
 }
 

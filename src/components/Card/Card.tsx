@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './Card.module.css';
 
-export type CardType = 'good' | 'bad' | 'improve' | 'default';
+export type CardType = string;
 
 interface CardProps {
   type?: CardType;

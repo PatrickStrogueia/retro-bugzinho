@@ -1,6 +1,6 @@
 export type SessaoStatus = 'LOBBY' | 'COLETA' | 'PROCESSANDO' | 'VOTACAO' | 'RESULTADOS' | 'ACOES';
 
-export type ItemType = 'good' | 'bad' | 'improve';
+export type ItemType = string; // was 'good' | 'bad' | 'improve'
 
 export interface Sessao {
   id: string;
@@ -11,6 +11,7 @@ export interface Sessao {
   config_votacao?: {
     max_fichas: number;
     aposta_livre: boolean;
+    template?: string;
   } | null;
 }
 

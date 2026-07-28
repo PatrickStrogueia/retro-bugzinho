@@ -10,10 +10,38 @@ interface FaseColetaProps {
   sessaoId: string;
 }
 
+const TEMPLATES: Record<string, { id: string, label: string, variant: 'primary' | 'secondary' | 'gold' }[]> = {
+  classic: [
+    { id: "good", label: "🟢 O que foi Bom", variant: "primary" },
+    { id: "bad", label: "🔴 O que foi Ruim", variant: "secondary" },
+    { id: "improve", label: "🟡 Melhorias", variant: "gold" }
+  ],
+  starfish: [
+    { id: "keep", label: "⭐ Keep", variant: "primary" },
+    { id: "more", label: "📈 More", variant: "primary" },
+    { id: "less", label: "📉 Less", variant: "secondary" },
+    { id: "start", label: "🚀 Start", variant: "gold" },
+    { id: "stop", label: "🛑 Stop", variant: "secondary" }
+  ],
+  "4ls": [
+    { id: "liked", label: "❤️ Liked", variant: "primary" },
+    { id: "learned", label: "🧠 Learned", variant: "gold" },
+    { id: "lacked", label: "💔 Lacked", variant: "secondary" },
+    { id: "longed", label: "🔭 Longed for", variant: "primary" }
+  ],
+  sailboat: [
+    { id: "wind", label: "💨 Vento", variant: "primary" },
+    { id: "anchor", label: "⚓ Âncora", variant: "secondary" },
+    { id: "rock", label: "🪨 Pedra", variant: "secondary" },
+    { id: "island", label: "🏝️ Ilha", variant: "gold" }
+  ]
+};
+
 export const FaseColeta = ({ sessaoId }: FaseColetaProps) => {
   const [texto, setTexto] = useState("");
   const [enviando, setEnviando] = useState(false);
   const [itens, setItens] = useState<ItemRetro[]>([]);
+  const [template, setTemplate] = useState("classic");
   const [meusCartoesIds, setMeusCartoesIds] = useState<string[]>([]);
   const [editandoId, setEditandoId] = useState<string | null>(null);
   const [textoEditado, setTextoEditado] = useState("");
@@ -42,6 +70,16 @@ export const FaseColeta = ({ sessaoId }: FaseColetaProps) => {
         .order("created_at", { ascending: false });
 
       if (data) setItens(data);
+      
+      const { data: configData } = await supabase
+        .from("sessoes")
+        .select("config_votacao")
+        .eq("id", sessaoId)
+        .single();
+        
+      if (configData?.config_votacao?.template) {
+        setTemplate(configData.config_votacao.template);
+      }
     };
 
     buscarItens();
@@ -150,15 +188,16 @@ export const FaseColeta = ({ sessaoId }: FaseColetaProps) => {
         />
 
         <div className={styles.acoes}>
-          <Button variant="primary" onClick={() => enviarItem("good")} disabled={enviando || !texto.trim()}>
-            🟢 O que foi Bom
-          </Button>
-          <Button variant="secondary" onClick={() => enviarItem("bad")} disabled={enviando || !texto.trim()}>
-            🔴 O que foi Ruim
-          </Button>
-          <Button variant="gold" onClick={() => enviarItem("improve")} disabled={enviando || !texto.trim()}>
-            🟡 Melhorias
-          </Button>
+          {TEMPLATES[template]?.map(cat => (
+            <Button 
+              key={cat.id} 
+              variant={cat.variant} 
+              onClick={() => enviarItem(cat.id)} 
+              disabled={enviando || !texto.trim()}
+            >
+              {cat.label}
+            </Button>
+          ))}
         </div>
       </div>
 

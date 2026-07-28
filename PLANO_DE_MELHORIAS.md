@@ -57,10 +57,10 @@ Este documento consolida a estratégia de evolução do **Bugzinho Retro**, orga
   - [x] Permitir que o Dealer escolha o modo de votação: "Aposta Livre" (várias fichas na mesma carta) ou "Uma Ficha por Carta".
   - [x] A configuração deve ser salva na tabela `sessoes` (`config_votacao` JSONB).
 
-- [ ] **4.2 Múltiplos Templates de Retrospectiva**
-  - [ ] Template *Starfish* (Keep, More, Less, Start, Stop).
-  - [ ] Template *4Ls* (Liked, Learned, Lacked, Longed for).
-  - [ ] Template *Sailboat* (Ventos, Âncoras, Riscos, Porto).
+- [x] **4.2 Múltiplos Templates de Retrospectiva**
+  - [x] Template *Starfish* (Keep, More, Less, Start, Stop).
+  - [x] Template *4L's* (Liked, Learned, Lacked, Longed for).
+  - [x] Template *Sailboat* (Vento, Âncora, Pedra, Ilha).
 
 - [ ] **4.3 Efeitos Sonoros & Animações Visuais**
   - [ ] Efeitos sonoros (SFX) ao colocar ficha na carta e ao submeter card.
