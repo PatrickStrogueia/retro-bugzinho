@@ -64,15 +64,31 @@ export const FaseVotacao = ({ sessaoId }: FaseVotacaoProps) => {
     };
   }, [sessaoId]);
 
-  // Função para adicionar voto
-  const adicionarVoto = async (item: ItemRetro) => {
-    if (fichasRestantes <= 0) {
-      alert("Você não tem mais fichas disponíveis!");
+  // Função para adicionar ou remover voto
+  const toggleVoto = async (item: ItemRetro) => {
+    const jaVotei = meusVotos.includes(item.id);
+
+    if (jaVotei) {
+      // Remover voto
+      const novosMeusVotos = meusVotos.filter(id => id !== item.id);
+      setMeusVotos(novosMeusVotos);
+      localStorage.setItem(`bugzinho_votos_${sessaoId}`, JSON.stringify(novosMeusVotos));
+
+      const novosVotos = Math.max(0, item.votos - 1);
+      
+      setItens((prev) => prev.map(i => i.id === item.id ? { ...i, votos: novosVotos } : i));
+
+      const { error } = await supabase
+        .from("itens_retro")
+        .update({ votos: novosVotos })
+        .eq("id", item.id);
+
+      if (error) console.error("Erro ao remover voto:", error);
       return;
     }
-    
-    if (meusVotos.includes(item.id)) {
-      alert("Você já colocou uma ficha neste item!");
+
+    if (fichasRestantes <= 0) {
+      alert("Você não tem mais fichas disponíveis!");
       return;
     }
 
@@ -143,10 +159,13 @@ export const FaseVotacao = ({ sessaoId }: FaseVotacaoProps) => {
               </Card>
               
               <div className={styles.areaVoto}>
-                <div style={{ opacity: jaVotei ? 0.5 : 1, filter: jaVotei ? "grayscale(100%)" : "none" }}>
+                <div 
+                  style={{ opacity: jaVotei ? 0.7 : 1, filter: jaVotei ? "grayscale(80%)" : "none", cursor: "pointer" }} 
+                  title={jaVotei ? "Clique para remover sua ficha" : "Adicionar ficha"}
+                >
                   <PokerChip 
                     value={1} 
-                    onClick={() => adicionarVoto(item)} 
+                    onClick={() => toggleVoto(item)} 
                   />
                 </div>
                 <span className={styles.contador}>
@@ -155,8 +174,11 @@ export const FaseVotacao = ({ sessaoId }: FaseVotacaoProps) => {
               </div>
               
               {jaVotei && (
-                <div style={{ textAlign: "center", fontSize: "0.75rem", color: "var(--casino-gold)", marginTop: "-0.5rem" }}>
-                  Sua ficha está aqui!
+                <div 
+                  style={{ textAlign: "center", fontSize: "0.75rem", color: "var(--casino-red)", marginTop: "-0.5rem", cursor: "pointer", fontWeight: "bold" }}
+                  onClick={() => toggleVoto(item)}
+                >
+                  ✖ Retirar ficha
                 </div>
               )}
             </div>
