@@ -19,3 +19,6 @@ ALTER TABLE itens_retro ADD COLUMN IF NOT EXISTS parent_id UUID NULL REFERENCES 
 
 -- Alteração para a Fase 2.3: Adicionar análise de clima na sessão
 ALTER TABLE sessoes ADD COLUMN IF NOT EXISTS clima JSONB;
+
+-- Alteração para a Fase 3.1: Adicionar estado do cronômetro
+ALTER TABLE sessoes ADD COLUMN IF NOT EXISTS timer_state JSONB DEFAULT '{"status": "IDLE", "endsAt": null, "duration": 0}'::jsonb;

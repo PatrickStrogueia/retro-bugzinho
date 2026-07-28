@@ -7,6 +7,7 @@ export interface Sessao {
   created_at: string;
   status: SessaoStatus;
   clima?: any | null;
+  timer_state?: any | null;
 }
 
 export interface Participante {

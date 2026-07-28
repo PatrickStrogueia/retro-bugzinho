@@ -13,6 +13,7 @@ import { FaseResultados } from "@/components/FaseResultados/FaseResultados";
 import { FaseAcoes } from "@/components/FaseAcoes/FaseAcoes";
 import { SlotMachine } from "@/components/SlotMachine/SlotMachine";
 import { FaseLobby } from "@/components/FaseLobby/FaseLobby";
+import { Timer } from "@/components/Timer/Timer";
 import styles from "./page.module.css";
 
 export default function SalaDeRetrospectiva() {
@@ -218,6 +219,9 @@ export default function SalaDeRetrospectiva() {
       {statusSessao === "ACOES" && (
         <FaseAcoes sessaoId={sessaoId} isAdmin={isAdmin} />
       )}
+
+      {/* TIMER FLUTUANTE PARA DISCUSSÃO */}
+      <Timer sessaoId={sessaoId} isAdmin={isAdmin} />
 
       {/* PAINEL DO DEALER (Apenas para o Admin) */}
       {isAdmin && (

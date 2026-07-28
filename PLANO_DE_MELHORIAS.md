@@ -39,9 +39,9 @@ Este documento consolida a estratégia de evolução do **Bugzinho Retro**, orga
 ## ⏱️ Fase 3: Gestão do Tempo & Presença Real-Time (Prioridade Média - P2)
 > **Objetivo:** Manter a reunião dinâmica, timeboxed e com alta percepção de presença entre os participantes.
 
-- [ ] **3.1 Cronômetro de Discussão (Lean Coffee Timer)**
-  - [ ] Criar componente `Timer` regressivo configurável pelo Dealer (ex: 3min, 5min) para a fase de discussão dos tópicos.
-  - [ ] Tocar alerta sonoro temático ao expirar o tempo com opção de estender o tempo.
+- [x] **3.1 Cronômetro de Discussão (Lean Coffee Timer)**
+  - [x] Criar componente `Timer` regressivo configurável pelo Dealer (ex: 3min, 5min) para a fase de discussão dos tópicos.
+  - [x] Tocar alerta sonoro temático ao expirar o tempo com opção de estender o tempo.
 
 - [ ] **3.2 Presença Real-time ("Jogadores na Mesa")**
   - [ ] Exibir no Header a lista de participantes conectados à sala em tempo real com indicador de estado (`Online`, `Card enviado`, `Votação concluída`).

@@ -1,0 +1,81 @@
+.timerWrapper {
+  position: fixed;
+  bottom: 2rem;
+  left: 2rem;
+  background: var(--bg-card);
+  border: 2px solid var(--border-color);
+  border-radius: 12px;
+  padding: 1rem 1.25rem;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  min-width: 140px;
+  transition: all 0.3s ease;
+}
+
+.timerWrapper.flashing {
+  border-color: var(--casino-red);
+  animation: flash 1s infinite alternate;
+}
+
+@keyframes flash {
+  from { background-color: var(--bg-card); box-shadow: 0 10px 25px rgba(0,0,0,0.5); }
+  to { background-color: rgba(239, 68, 68, 0.15); box-shadow: 0 10px 30px rgba(239, 68, 68, 0.4); }
+}
+
+.timerHeader {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 600;
+}
+
+.timerDisplay {
+  font-family: monospace;
+  font-size: 2.75rem;
+  font-weight: bold;
+  color: var(--casino-gold);
+  line-height: 1.1;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+}
+
+.adminControls {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.controlBtn {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  border-radius: 6px;
+  padding: 0.4rem 0.6rem;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-weight: 500;
+}
+
+.controlBtn:hover {
+  background: var(--bg-surface-hover);
+  border-color: var(--casino-gold);
+  color: var(--casino-gold);
+}
+
+@media (max-width: 768px) {
+  .timerWrapper {
+    bottom: 1rem;
+    left: 1rem;
+    padding: 0.75rem;
+    min-width: 110px;
+  }
+  
+  .timerDisplay {
+    font-size: 2rem;
+  }
+}
