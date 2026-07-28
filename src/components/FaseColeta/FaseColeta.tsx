@@ -50,7 +50,7 @@ export const FaseColeta = ({ sessaoId }: FaseColetaProps) => {
   // Carrega IDs do localStorage
   useEffect(() => {
     cardSoundRef.current = new Audio("https://actions.google.com/sounds/v1/cartoon/pop.ogg");
-    if (cardSoundRef.current) cardSoundRef.current.volume = 0.5;
+    if (cardSoundRef.current) cardSoundRef.current.volume = 0.3;
 
     const saved = localStorage.getItem(`meus_cartoes_${sessaoId}`);
     if (saved) {

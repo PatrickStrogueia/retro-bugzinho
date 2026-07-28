@@ -1,7 +1,7 @@
 import { useState } from "react";
 import styles from "./ExportModal.module.css";
 import { Button } from "../Button/Button";
-import { ItemRetro, AcaoRetro } from "@/types/database";
+import { ItemRetro, AcaoRetro, Participante } from "@/types/database";
 
 interface ExportModalProps {
   isOpen: boolean;
@@ -9,9 +9,10 @@ interface ExportModalProps {
   itens: ItemRetro[];
   acoes: AcaoRetro[];
   clima?: any;
+  participantes?: Participante[];
 }
 
-export const ExportModal = ({ isOpen, onClose, itens, acoes, clima }: ExportModalProps) => {
+export const ExportModal = ({ isOpen, onClose, itens, acoes, clima, participantes }: ExportModalProps) => {
   const [copied, setCopied] = useState(false);
 
   if (!isOpen) return null;
@@ -24,6 +25,14 @@ export const ExportModal = ({ isOpen, onClose, itens, acoes, clima }: ExportModa
       md += `- **Sentimento Geral:** ${clima.score} - ${clima.sentimento}\n`;
       md += `- **Destaque:** ${clima.destaque}\n`;
       md += `- **Resumo:** ${clima.resumo}\n\n`;
+    }
+
+    if (participantes && participantes.length > 0) {
+      md += "## 👥 Participantes\n";
+      participantes.forEach(p => {
+        md += `- ${p.nome}\n`;
+      });
+      md += "\n";
     }
 
     // 1. Tópicos

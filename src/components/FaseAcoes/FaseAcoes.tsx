@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { supabase } from "@/lib/supabase";
 import { Button } from "../Button/Button";
 import { Input } from "../Input/Input";
-import { ItemRetro, AcaoRetro } from "@/types/database";
+import { ItemRetro, AcaoRetro, Participante } from "@/types/database";
 import { ExportModal } from "../ExportModal/ExportModal";
 import styles from "./FaseAcoes.module.css";
 
@@ -16,6 +16,7 @@ interface FaseAcoesProps {
 export const FaseAcoes = ({ sessaoId, isAdmin }: FaseAcoesProps) => {
   const [topItens, setTopItens] = useState<ItemRetro[]>([]);
   const [acoes, setAcoes] = useState<AcaoRetro[]>([]);
+  const [participantes, setParticipantes] = useState<Participante[]>([]);
   const [loading, setLoading] = useState(true);
   const [tableExists, setTableExists] = useState(true);
   const [isExportModalOpen, setIsExportModalOpen] = useState(false);
@@ -67,6 +68,17 @@ export const FaseAcoes = ({ sessaoId, isAdmin }: FaseAcoesProps) => {
       
       if (sessaoData?.clima) {
         setClima(sessaoData.clima);
+      }
+
+      // 4. Carrega os participantes
+      const { data: participantesData } = await supabase
+        .from("participantes")
+        .select("*")
+        .eq("sessao_id", sessaoId)
+        .order("nome", { ascending: true });
+
+      if (participantesData) {
+        setParticipantes(participantesData as Participante[]);
       }
 
       setLoading(false);
@@ -184,6 +196,7 @@ export const FaseAcoes = ({ sessaoId, isAdmin }: FaseAcoesProps) => {
         itens={topItens} 
         acoes={acoes} 
         clima={clima}
+        participantes={participantes}
       />
 
       <div className={styles.header}>

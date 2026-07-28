@@ -25,7 +25,7 @@ export const FaseResultados = ({ sessaoId, isAdmin }: FaseResultadosProps) => {
     // Actually, a nice subtle chime or applause is better. Let's use "xylophone" or "magic"
     // Wait, let's use: https://actions.google.com/sounds/v1/foley/glass_clink.ogg? No, let's just use window audio
     victorySoundRef.current = new Audio("https://actions.google.com/sounds/v1/cartoon/cartoon_boing.ogg");
-    if (victorySoundRef.current) victorySoundRef.current.volume = 0.5;
+    if (victorySoundRef.current) victorySoundRef.current.volume = 0.3;
     victorySoundRef.current?.play().catch(e => console.log(e));
 
     const timer = setTimeout(() => setShowConfetti(false), 5000);

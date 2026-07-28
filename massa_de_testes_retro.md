@@ -9,51 +9,51 @@ Observe que alguns cards têm o **mesmo tema raiz, mas foram escritos de formas 
 ## 🟢 O que foi bom (Good)
 
 **Alice (Frontend - Projeto A)**
-> "O uso do novo Design System com Tailwind acelerou muito a criação das telas."
+> "O uso do novo Design System com Tailwind acelerou muito a criação das telas no Projeto A."
 
 **Bruno (Backend - Projeto A)**
-> "A decisão técnica de separar os microsserviços pagou dividendos. O banco de dados está super rápido agora."
+> "A decisão técnica de separar os microsserviços pagou dividendos no Projeto A. O banco de dados está super rápido agora."
 
 **Carlos (QA - Projeto B)**
-> "A suíte de testes de regressão automatizados no Cypress não teve nenhum falso positivo (flaky test) nesta sprint. Muito estável!"
+> "A suíte de testes de regressão automatizados no Cypress não teve nenhum falso positivo (flaky test) nesta sprint no Projeto B. Muito estável!"
 
 **Alice (Frontend - Projeto A)**
-> "Entregamos a tela de Dashboard dois dias antes do prazo. O time mandou bem demais!"
+> "Entregamos a tela de Dashboard dois dias antes do prazo no Projeto A. O time mandou bem demais!"
 
 ---
 
 ## 🔴 O que foi ruim (Bad)
 
 **Alice (Frontend - Projeto A)**
-> "Tive muitos bloqueios porque os contratos e a documentação da API do backend não refletiam as mudanças reais."
+> "Tive muitos bloqueios porque os contratos e a documentação da API do backend não refletiam as mudanças reais no Projeto A."
 
 **Bruno (Backend - Projeto A)**
-> "Passei muito tempo em call com o frontend explicando os retornos da API porque a nossa wiki estava desatualizada."
+> "Passei muito tempo em call com o frontend explicando os retornos da API porque a nossa wiki estava desatualizada no Projeto A."
 
 **Carlos (QA - Projeto B)**
-> "O ambiente de homologação caiu umas três vezes essa semana, isso me impediu de avançar com os testes E2E."
+> "O ambiente de homologação caiu umas três vezes essa semana, isso me impediu de avançar com os testes E2E no Projeto B."
 
 **Alice (Frontend - Projeto A)**
-> "A esteira de CI/CD demorou quase 30 minutos para rodar em cada PR. Um gargalo enorme."
+> "A esteira de CI/CD demorou quase 30 minutos para rodar em cada PR no Projeto A. Um gargalo enorme."
 
 **Bruno (Backend - Projeto A)**
-> "Tivemos um retrabalho chato porque a regra de negócio da 'task de pagamentos' não estava clara na planning."
+> "Tivemos um retrabalho chato porque a regra de negócio da 'task de pagamentos' não estava clara na planning do Projeto A."
 
 ---
 
 ## 🔵 O que pode melhorar (Improve)
 
 **Alice (Frontend - Projeto A)**
-> "Deveríamos automatizar a geração de documentação de API usando ferramentas como o Swagger."
+> "Deveríamos automatizar a geração de documentação de API usando ferramentas como o Swagger no Projeto A."
 
 **Bruno (Backend - Projeto A)**
-> "Precisamos alinhar os contratos de dados (JSON) logo no começo da sprint para não bloquear o front."
+> "Precisamos alinhar os contratos de dados (JSON) logo no começo da sprint para não bloquear o front no Projeto A."
 
 **Carlos (QA - Projeto B)**
-> "É urgente criar um script de health check ou dar um up nas máquinas de homologação, a instabilidade lá está crítica."
+> "É urgente criar um script de health check ou dar um up nas máquinas de homologação no Projeto B, a instabilidade lá está crítica."
 
 **Bruno (Backend - Projeto A)**
-> "Acho que as nossas dailies estão passando muito do tempo. Poderíamos focar mais nas dependências em vez de status de tarefa."
+> "Acho que as nossas dailies estão passando muito do tempo no Projeto A. Poderíamos focar mais nas dependências em vez de status de tarefa."
 
 ---
 

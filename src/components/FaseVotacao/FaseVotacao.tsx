@@ -25,7 +25,7 @@ export const FaseVotacao = ({ sessaoId }: FaseVotacaoProps) => {
   // Busca os itens, escuta atualizações e recupera os votos locais
   useEffect(() => {
     chipSoundRef.current = new Audio("https://actions.google.com/sounds/v1/foley/glass_clink.ogg");
-    if (chipSoundRef.current) chipSoundRef.current.volume = 0.5;
+    if (chipSoundRef.current) chipSoundRef.current.volume = 0.3;
 
     const buscarItens = async () => {
       const { data, error } = await supabase
