@@ -5,6 +5,7 @@ import { supabase } from "@/lib/supabase";
 import { Button } from "../Button/Button";
 import { Input } from "../Input/Input";
 import { ItemRetro, AcaoRetro } from "@/types/database";
+import { ExportModal } from "../ExportModal/ExportModal";
 import styles from "./FaseAcoes.module.css";
 
 interface FaseAcoesProps {
@@ -17,6 +18,7 @@ export const FaseAcoes = ({ sessaoId, isAdmin }: FaseAcoesProps) => {
   const [acoes, setAcoes] = useState<AcaoRetro[]>([]);
   const [loading, setLoading] = useState(true);
   const [tableExists, setTableExists] = useState(true);
+  const [isExportModalOpen, setIsExportModalOpen] = useState(false);
 
   // Form states
   const [descricao, setDescricao] = useState("");
@@ -164,10 +166,22 @@ export const FaseAcoes = ({ sessaoId, isAdmin }: FaseAcoesProps) => {
 
   return (
     <div className={styles.container}>
+      <ExportModal 
+        isOpen={isExportModalOpen} 
+        onClose={() => setIsExportModalOpen(false)} 
+        itens={topItens} 
+        acoes={acoes} 
+      />
+
       <div className={styles.header}>
-        <h3 className={styles.title}>
-          Plano de Ação da Retro 🎯
-        </h3>
+        <div className={styles.headerTitleBox}>
+          <h3 className={styles.title}>
+            Plano de Ação da Retro 🎯
+          </h3>
+          <Button variant="secondary" onClick={() => setIsExportModalOpen(true)}>
+            📄 Exportar Resumo
+          </Button>
+        </div>
         <p className={styles.subtitle}>
           Defina tarefas acionáveis e responsáveis para solucionar os problemas identificados na sprint.
         </p>

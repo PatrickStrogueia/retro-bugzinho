@@ -11,10 +11,18 @@
   text-align: center;
 }
 
+.headerTitleBox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
 .title {
   color: var(--casino-gold);
   font-size: 2rem;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0;
   display: flex;
   align-items: center;
   justify-content: center;
