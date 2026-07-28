@@ -33,7 +33,7 @@ export const PresencaMesa = ({ sessaoId, participanteId, nome, statusSessao }: P
       
       for (const id in newState) {
         // presenceState returns an array of states for a given key, we take the first
-        const userPresence = newState[id][0] as ParticipantePresenca;
+        const userPresence = newState[id][0] as unknown as ParticipantePresenca;
         if (userPresence) {
           users.push(userPresence);
         }
