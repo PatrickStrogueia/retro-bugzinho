@@ -6,6 +6,7 @@ export interface Sessao {
   id: string;
   created_at: string;
   status: SessaoStatus;
+  clima?: any | null;
 }
 
 export interface Participante {

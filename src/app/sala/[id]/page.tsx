@@ -212,7 +212,7 @@ export default function SalaDeRetrospectiva() {
       )}
 
       {statusSessao === "RESULTADOS" && (
-        <FaseResultados sessaoId={sessaoId} />
+        <FaseResultados sessaoId={sessaoId} isAdmin={isAdmin} />
       )}
 
       {statusSessao === "ACOES" && (

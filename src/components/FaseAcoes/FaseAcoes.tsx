@@ -19,6 +19,7 @@ export const FaseAcoes = ({ sessaoId, isAdmin }: FaseAcoesProps) => {
   const [loading, setLoading] = useState(true);
   const [tableExists, setTableExists] = useState(true);
   const [isExportModalOpen, setIsExportModalOpen] = useState(false);
+  const [clima, setClima] = useState<any>(null);
 
   // Form states
   const [descricao, setDescricao] = useState("");
@@ -55,6 +56,17 @@ export const FaseAcoes = ({ sessaoId, isAdmin }: FaseAcoesProps) => {
         }
       } else if (acoesData) {
         setAcoes(acoesData as AcaoRetro[]);
+      }
+
+      // 3. Carrega o clima se existir
+      const { data: sessaoData } = await supabase
+        .from("sessoes")
+        .select("clima")
+        .eq("id", sessaoId)
+        .single();
+      
+      if (sessaoData?.clima) {
+        setClima(sessaoData.clima);
       }
 
       setLoading(false);
@@ -171,6 +183,7 @@ export const FaseAcoes = ({ sessaoId, isAdmin }: FaseAcoesProps) => {
         onClose={() => setIsExportModalOpen(false)} 
         itens={topItens} 
         acoes={acoes} 
+        clima={clima}
       />
 
       <div className={styles.header}>

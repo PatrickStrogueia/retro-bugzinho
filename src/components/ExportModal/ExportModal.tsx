@@ -8,15 +8,23 @@ interface ExportModalProps {
   onClose: () => void;
   itens: ItemRetro[];
   acoes: AcaoRetro[];
+  clima?: any;
 }
 
-export const ExportModal = ({ isOpen, onClose, itens, acoes }: ExportModalProps) => {
+export const ExportModal = ({ isOpen, onClose, itens, acoes, clima }: ExportModalProps) => {
   const [copied, setCopied] = useState(false);
 
   if (!isOpen) return null;
 
   const generateMarkdown = () => {
     let md = "# 📋 Relatório da Retrospectiva\n\n";
+
+    if (clima) {
+      md += "## ✨ Análise de Clima da Sprint\n";
+      md += `- **Sentimento Geral:** ${clima.score} - ${clima.sentimento}\n`;
+      md += `- **Destaque:** ${clima.destaque}\n`;
+      md += `- **Resumo:** ${clima.resumo}\n\n`;
+    }
 
     // 1. Tópicos
     const principais = itens.filter(i => !i.parent_id);

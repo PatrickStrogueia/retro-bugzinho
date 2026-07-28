@@ -31,8 +31,8 @@ Este documento consolida a estratégia de evolução do **Bugzinho Retro**, orga
   - [x] Opção de copiar resumo estruturado da retrospectiva em **Markdown** (pronto para Notion / GitHub / Azure DevOps).
   - [x] Opção de exportar resumo estruturado em arquivo **.md**.
 
-- [ ] **2.3 Análise de Clima e Sentimento da Sprint**
-  - [ ] Adicionar um widget no topo da tela de Resultados exibindo o tom geral da sprint (ex: *"75% Positivo / Destaque para Infraestrutura"*) analisado pelo Gemini.
+- [x] **2.3 Análise de Clima e Sentimento da Sprint**
+  - [x] Adicionar um widget no topo da tela de Resultados exibindo o tom geral da sprint (ex: *"75% Positivo / Destaque para Infraestrutura"*) analisado pelo Gemini.
 
 ---
 

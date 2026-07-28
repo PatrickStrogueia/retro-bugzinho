@@ -4,13 +4,15 @@ import { useState, useEffect } from "react";
 import { supabase } from "@/lib/supabase";
 import { Card } from "../Card/Card";
 import { ItemRetro } from "@/types/database";
+import { WidgetClima } from "../WidgetClima/WidgetClima";
 import styles from "./FaseResultados.module.css";
 
 interface FaseResultadosProps {
   sessaoId: string;
+  isAdmin?: boolean;
 }
 
-export const FaseResultados = ({ sessaoId }: FaseResultadosProps) => {
+export const FaseResultados = ({ sessaoId, isAdmin }: FaseResultadosProps) => {
   const [itens, setItens] = useState<ItemRetro[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -40,6 +42,8 @@ export const FaseResultados = ({ sessaoId }: FaseResultadosProps) => {
         </h3>
         <p className={styles.subtitle}>Estes foram os temas agrupados pela IA, ordenados pelos mais votados da equipe.</p>
       </div>
+
+      <WidgetClima sessaoId={sessaoId} isAdmin={isAdmin} />
 
       <div className={styles.gridCartas}>
         {itens.filter(i => !i.parent_id).map((item, index) => {
